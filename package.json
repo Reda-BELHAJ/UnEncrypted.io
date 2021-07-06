@@ -14,7 +14,8 @@
     "react": "17.0.2",
     "react-dom": "17.0.2",
     "react-icons": "^4.2.0",
-    "react-marquee-slider": "^1.1.5"
+    "react-marquee-slider": "^1.1.5",
+    "use-sound": "^4.0.1"
   },
   "devDependencies": {
     "autoprefixer": "^10.2.6",
