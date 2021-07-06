@@ -6,14 +6,14 @@ import Tracks from '../components/Tracks'
 
 const about = () => {
     return (
-        <body>
+        <div>
             <div className="App min-h-screen relative bg-white dark:bg-gray-900">
                 <Navbar />
                 <About />
                 <Tracks />
                 <Footer />
             </div>
-        </body>
+        </div>
     )
 }
 

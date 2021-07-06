@@ -10,16 +10,16 @@ const index = () => {
       <Head>
         <title>UnEncrypted</title>
 
-        <meta itemprop="name" content="UnEncrypted" />
+        <meta itemProp="name" content="UnEncrypted" />
       </Head>
-      <body className="bg-white dark:bg-gray-900">
+      <div className="bg-white dark:bg-gray-900">
         <div className="App min-h-screen relative">
           <Navbar />
           <Header />
           <Hero />
           <Footer />
         </div>
-      </body>
+      </div>
     </>
     
   )
