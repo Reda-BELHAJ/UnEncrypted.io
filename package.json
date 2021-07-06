@@ -9,6 +9,7 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@tailwindcss/typography": "^0.4.1",
     "gray-matter": "^4.0.3",
     "mdx-prism": "^0.3.3",
     "next": "11.0.1",

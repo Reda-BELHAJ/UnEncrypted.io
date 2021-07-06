@@ -64,11 +64,11 @@ const About = () => {
                             </div>
                             <div className="pt-8 pb-8 text-gray-900 dark:text-gray-50 max-w-none xl:col-span-2 text-justify">
                                 {information.summary.map((item, id) => (
-                                    <>
+                                    <div key={id}>
                                         <p>
                                             {item}
                                         </p><br/>
-                                    </>
+                                    </div>
                                 ))}
                                 <MarqueeSec />
                             </div>
