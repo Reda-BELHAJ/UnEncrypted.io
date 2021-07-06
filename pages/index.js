@@ -1,13 +1,14 @@
-import Head from 'next/head'
-import Image from 'next/image'
 import Header from '../components/Header'
+import Navbar from '../components/Navbar'
 
 const index = () => {
   return (
     <body>
-      
-      <Header />
-      {/* <Hero /> */}
+      <div className="App min-h-screen relative bg-white dark:bg-gray-900">
+        <Navbar />
+        <Header />
+        {/* <Hero /> */}
+      </div>
     </body>
   )
 }
