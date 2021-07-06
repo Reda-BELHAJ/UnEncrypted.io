@@ -1,26 +1,30 @@
 import { BiSun, BiMoon } from "react-icons/bi";
-import { ThemeContext } from './Util/ThemeContext';
+import { useState, useEffect } from "react";
+import { useTheme } from "next-themes";
 
 const Toggle = () => {
-    const {theme, setTheme} = React.useContext(ThemeContext);
+    const [isMounted, setIsMounted] = useState(false);
+    const { theme, setTheme } = useTheme();
+
+    useEffect(() => {
+        setIsMounted(true);
+    }, []);
+
+    const toggleTheme = () => {
+        if (isMounted) {
+        setTheme(theme === "light" ? "dark" : "light");
+        }
+    };
 
     return (
-        theme === 'dark' ? 
-        (
-            <button className="flex items-center mx-2 text-base text-gray-900 hover:text-green-500 dark:text-gray-50"
-                onClick={()=>setTheme(theme === 'dark' ? 'light':'dark')}>
-                <span className="text-lg">
-                    <BiMoon />
-                </span>
-            </button>
-        ) : (
-            <button className="flex items-center mx-2 text-base text-gray-900 hover:text-green-500 dark:text-gray-50"
-                onClick={()=>setTheme(theme === 'dark' ? 'light':'dark')}>
-                <span className="text-lg">
-                    <BiSun />
-                </span>
-            </button>
-        )
+        <button
+              className="flex items-center mx-2 text-base text-gray-800 hover:text-indigo-600 dark:text-gray-50"
+              onClick={toggleTheme}
+            >
+              <span className="text-lg">
+                {isMounted && theme === "dark" ? <BiMoon /> : <BiSun />}
+              </span>
+        </button>
     )
 }
 

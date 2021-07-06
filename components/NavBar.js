@@ -1,6 +1,7 @@
 import Link from 'next/link';
 import { GiGreatPyramid } from "react-icons/gi";
 import { SiAboutDotMe, SiTwitter, SiGithub } from "react-icons/si";
+import Toggle from './Toggle'
 
 const Navbar = () => {
     return (
@@ -20,7 +21,7 @@ const Navbar = () => {
                     </Link>
                     </div>
                     <div className="flex items-center -mx-2">
-                        <Toggle/>
+                        <Toggle />
 
                         <Link href="/about">
                             <a className="flex items-center mx-2 text-base text-gray-800 hover:text-green-500 dark:text-gray-50">
