@@ -1,7 +1,6 @@
 import { BiSun, BiMoon } from "react-icons/bi";
 import { useState, useEffect } from "react";
 import { useTheme } from "next-themes";
-
 import useSound from 'use-sound';
 import Click from '../public/sounds/click.mp3'
 
