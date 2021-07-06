@@ -9,6 +9,7 @@ const about = () => {
             <div className="App min-h-screen relative bg-white dark:bg-gray-900">
                 <Navbar />
                 <About />
+                {/* Tracks */}
                 <Footer />
             </div>
         </body>
