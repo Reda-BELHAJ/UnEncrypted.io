@@ -1,5 +1,6 @@
 import { getAllPostSlugs, getPostdata } from "../../Lib/mdx";
 import matter from "gray-matter";
+import Markdown from 'markdown-to-jsx';
 
 export default function Posts({ source, frontMatter }) {
   return (
@@ -9,7 +10,7 @@ export default function Posts({ source, frontMatter }) {
             {frontMatter.title}
           </h1>
           <div>
-            {source}
+          <Markdown children={source} />
           </div>
       </div>
     </>
