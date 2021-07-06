@@ -13,6 +13,7 @@ export function getAllPosts() {
       path.join(contentDirectory, fileName),
       'utf8'
     );
+    
     const { data, content } = matter(fileContents);
 
     return {
