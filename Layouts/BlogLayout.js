@@ -17,11 +17,16 @@ const BlogLayout = ({source, frontMatter}) => {
                                 src={frontMatter.image}
                                 alt="Article Image"
                             />
-
-                            {
-                                <Tag link="/" tag="TryHackMe"/>
-                            }
-
+                            <div className="flex flex-col items-center">
+                                <div className="flex justify-around">
+                                    {
+                                        frontMatter.tags.map((item, id)=> (
+                                            <Tag key={id} link="/" tag={item}/>
+                                        ))
+                                    }
+                                </div>
+                            </div>
+                                
                             <div className="prose prose-green md:prose-lg lg:prose-xl text-gray-900 dark:text-gray-50">
                                 <h1>
                                     {frontMatter.title}
