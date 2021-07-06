@@ -7,7 +7,7 @@ import Tracks from '../components/Tracks'
 const about = () => {
     return (
         <div>
-            <div className="App min-h-screen relative bg-white dark:bg-gray-900">
+            <div className="min-h-screen relative bg-white dark:bg-gray-900">
                 <Navbar />
                 <About />
                 <Tracks />

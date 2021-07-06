@@ -13,7 +13,7 @@ const index = () => {
         <meta itemProp="name" content="UnEncrypted" />
       </Head>
       <div className="bg-white dark:bg-gray-900">
-        <div className="App min-h-screen relative">
+        <div className="min-h-screen relative">
           <Navbar />
           <Header />
           <Hero />
