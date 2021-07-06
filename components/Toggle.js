@@ -3,11 +3,12 @@ import { useState, useEffect } from "react";
 import { useTheme } from "next-themes";
 
 import useSound from 'use-sound';
-import Click from '../publix/sounds/click.mp3'
+import Click from '../public/sounds/click.mp3'
 
 const Toggle = () => {
     const [isMounted, setIsMounted] = useState(false);
     const { theme, setTheme } = useTheme();
+    const [playbackRate, setPlaybackRate] = useState(0.75);
 
     useEffect(() => {
         setIsMounted(true);
@@ -19,12 +20,24 @@ const Toggle = () => {
         }
     };
 
-    const [play] = useSound(Click);
+    const [play] = useSound(Click, {
+      playbackRate,
+      volume: 0.5,
+    });
+
+    const handleClick = () => {
+      setPlaybackRate(playbackRate + 0.1);
+      play();
+    };
 
     return (
         <button
-              className="flex items-center mx-2 text-base text-gray-800 hover:text-indigo-600 dark:text-gray-50"
-              onClick={toggleTheme | play}
+              className="flex items-center mx-2 text-base text-gray-800 hover:text-green-500 dark:text-gray-50"
+              onClick={() => {
+                toggleTheme()
+                handleClick()
+                }
+              }
             >
               <span className="text-lg">
                 {isMounted && theme === "dark" ? <BiMoon /> : <BiSun />}
