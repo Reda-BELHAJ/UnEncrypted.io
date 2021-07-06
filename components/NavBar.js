@@ -20,7 +20,7 @@ const Navbar = () => {
                     </Link>
                     </div>
                     <div className="flex items-center -mx-2">
-                        {/* <Toggle/> */}
+                        <Toggle/>
 
                         <Link href="/about">
                             <a className="flex items-center mx-2 text-base text-gray-800 hover:text-green-500 dark:text-gray-50">
