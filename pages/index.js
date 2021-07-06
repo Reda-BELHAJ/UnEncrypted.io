@@ -12,8 +12,8 @@ const index = () => {
 
         <meta itemprop="name" content="UnEncrypted" />
       </Head>
-      <body>
-        <div className="App min-h-screen relative bg-white dark:bg-gray-900">
+      <body className="bg-white dark:bg-gray-900">
+        <div className="App min-h-screen relative">
           <Navbar />
           <Header />
           <Hero />
