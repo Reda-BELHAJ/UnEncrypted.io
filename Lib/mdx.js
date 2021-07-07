@@ -1,6 +1,7 @@
 import fs from "fs";
 import path from "path";
 import matter from "gray-matter";
+import readingTime from "reading-time";
 
 const postDirectory = path.join(process.cwd(), "_content");
 
@@ -58,4 +59,19 @@ export const getPostdata = async (slug) => {
   const postContent = fs.readFileSync(fullPath, "utf8");
 
   return postContent;
+};
+
+export const getAllBlogPosts = () => {
+  const allFiles = fs.readdirSync(postDirectory);
+  const allBlogs = [];
+
+  allFiles.map((file) => {
+    const filePath = path.join(postDirectory, file);
+    const fileContent = fs.readFileSync(filePath, "utf-8");
+    const { data, content } = matter(fileContent);
+    const readTime = readingTime(content);
+    allBlogs.push({ data, readTime });
+  });
+
+  return allBlogs;
 };
