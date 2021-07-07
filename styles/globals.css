@@ -12,6 +12,7 @@
 ::-webkit-scrollbar-thumb{
     background: #6ee7b7;
     border-radius: 3px;
+    @apply dark:bg-green-500
 }
 
 ::-webkit-scrollbar-thumb:hover{ background: #10b981; }
