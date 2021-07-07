@@ -5,7 +5,8 @@ import Navbar from '../components/Navbar'
 import Hero from '../components/Hero'
 import { getAllBlogPosts } from "../Lib/mdx";
 
-export default function index({blogs}){
+export default function index({blogs, catBlogs}){
+  console.log(catBlogs)
   return (
     <>
       <Head>
@@ -28,9 +29,15 @@ export default function index({blogs}){
 
 export const getStaticProps = () => {
   const allBlogs = getAllBlogPosts();
+
+  const catBlogs = allBlogs.filter(
+    blog => blog.data.tags.includes("TailwindCss")
+  )
+
   return {
     props: {
       blogs: allBlogs,
+      catBlogs: catBlogs,
     },
   };
 };
