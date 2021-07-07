@@ -18,8 +18,7 @@ export default function index({blogs}){
         <div className="min-h-screen relative">
           <Navbar />
           <Header />
-          <Hero/>
-          
+          <Hero blogs={blogs}/>
           <Footer />
         </div>
       </div>

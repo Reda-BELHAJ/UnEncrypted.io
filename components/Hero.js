@@ -1,6 +1,8 @@
 import Tag from './Tag'
+import BlogCard from '../Layouts/BlogCard'
 
-const Hero = () => {
+const Hero = ({blogs}) => {
+    
     return (
         <>
             <div className="p-12 mx-auto max-w-7xl">
@@ -8,7 +10,11 @@ const Hero = () => {
 
                     <div className="md:row-span-2 md:col-span-2 lg:row-span-2 lg:col-span-3 rounded">
                         <h2 className="font-bold text-green-300 dark:text-green-500">RECENTLY PUBLISHED</h2><br/>
-                        
+                        {blogs.map((item, id) => (
+                                    <div key={id}>
+                                        <BlogCard blog={item}/>
+                                    </div>
+                        ))}
                     </div>
                     <div className="rounded">
                         <h2 className="font-bold text-green-300 dark:text-green-500">TOP CATEGORIES</h2><br/>
