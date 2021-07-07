@@ -6,7 +6,6 @@ import Hero from '../components/Hero'
 import { getAllBlogPosts } from "../Lib/mdx";
 
 export default function index({blogs}){
-  console.log(blogs)
   return (
     <>
       <Head>
