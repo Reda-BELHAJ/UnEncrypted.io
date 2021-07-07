@@ -4,7 +4,7 @@ import Header from '../components/Header'
 import Navbar from '../components/Navbar'
 import Hero from '../components/Hero'
 
-const index = () => {
+export default function index(){
   return (
     <>
       <Head>
@@ -16,7 +16,7 @@ const index = () => {
         <div className="min-h-screen relative">
           <Navbar />
           <Header />
-          <Hero />
+          <Hero/>
           <Footer />
         </div>
       </div>
@@ -24,5 +24,3 @@ const index = () => {
     
   )
 }
-
-export default index

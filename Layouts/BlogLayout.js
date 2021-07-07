@@ -5,11 +5,16 @@ import BlogShare from '../components/BlogShare';
 import Tag from '../components/Tag'
 import { BsThreeDots } from "react-icons/bs";
 import Back from '../components/BackArrow';
-
+import Head from "next/head";
 
 const BlogLayout = ({source, frontMatter}) => {
     return (
         <>
+            <Head>
+                <title>UnEncrypted</title>
+
+                <meta itemProp="name" content="UnEncrypted" />
+            </Head>
             <div className="bg-white dark:bg-gray-900">
                 <div className="min-h-screen relative">
                     <Navbar />
