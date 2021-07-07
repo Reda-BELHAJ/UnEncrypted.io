@@ -1,17 +1,16 @@
 import { AiOutlineArrowRight } from "react-icons/ai";
 import Link from "next/link";
-import Tag from "../components/Tag";
 
 function BlogCard({ blog }) {
     return (
         <>
-            <div className="py-6 md:px-10 flex flex-col items-start rounded transform hover:scale-105">
-                {blog.data.tags.map((item, id) => (
-                    <Tag key={id} link="/" tag={item} />
-                ))}
-                <h2 className="sm:text-2xl text-xl title-font font-semibold text-gray-700 mt-4 mb-4 dark:text-gray-100 ">
+            <div className="py-3 md:mr-10 flex flex-col items-start rounded">
+                <h2 className="sm:text-2xl text-xl title-font font-bold text-gray-700 mt-4 mb-4 dark:text-gray-100 ">
                     {blog.data.title}
                 </h2>
+                <p className="text-justify leading-relaxed mb-3 text-gray-800 dark:text-gray-200">
+                    {blog.data.summary}..
+                </p>
                 <div className="flex items-center flex-wrap pb-2 border-b-2 border-green-300 mt-auto w-full justify-between dark:border-green-500">
                     <Link
                         href={`/blog/${String(
