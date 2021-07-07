@@ -31,7 +31,7 @@ const Toggle = () => {
 
     return (
         <button
-              className="flex items-center mx-2 text-base text-gray-800 hover:text-green-500 dark:text-gray-50"
+              className="flex items-center mx-2 text-base dark:hover:text-green-500 text-gray-800 hover:text-green-500 dark:text-gray-50"
               onClick={() => {
                 toggleTheme()
                 handleClick()
