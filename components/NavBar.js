@@ -10,7 +10,7 @@ const Navbar = () => {
                 <div className="flex items-center justify-between">
                     <div>
                     <Link href="/">
-                        <a className="flex items-center hover:text-green-500 text-gray-800 dark:text-gray-50">
+                        <a className="flex items-center hover:text-green-500 dark:hover:text-green-500 text-gray-800 dark:text-gray-50">
                             <span className="text-xl font-semibold">
                                 <GiGreatPyramid />
                             </span>
@@ -24,7 +24,7 @@ const Navbar = () => {
                         <Toggle />
 
                         <Link href="/about">
-                            <a className="flex items-center mx-2 text-base text-gray-800 hover:text-green-500 dark:text-gray-50">
+                            <a className="flex items-center mx-2 text-base text-gray-800 dark:hover:text-green-500 hover:text-green-500 dark:text-gray-50">
                                 <span className="text-xl ">
                                 <SiAboutDotMe />
                                 </span>
@@ -32,7 +32,7 @@ const Navbar = () => {
                         </Link>
 
                         <a
-                            className="flex items-center mx-2 text-gray-900 hover:text-green-500 dark:text-gray-50"
+                            className="flex items-center mx-2 text-gray-900 dark:hover:text-green-500 hover:text-green-500 dark:text-gray-50"
                             href="https://twitter.com/RedatoB"
                             rel="noopener noreferrer"
                             target="_blank"
@@ -41,7 +41,7 @@ const Navbar = () => {
                         </a>
 
                         <a
-                            className="flex items-center mx-2 text-gray-900 hover:text-green-500 dark:text-gray-50"
+                            className="flex items-center mx-2 text-gray-900 dark:hover:text-green-500 hover:text-green-500 dark:text-gray-50"
                             href="https://github.com/Reda-BELHAJ"
                             rel="noopener noreferrer"
                             target="_blank"
