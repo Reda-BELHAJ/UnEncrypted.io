@@ -1,13 +1,19 @@
 import { AiOutlineArrowRight } from "react-icons/ai";
 import Link from "next/link";
+import moment from 'moment';
 
 function BlogCard({ blog }) {
+    const date = moment(blog.data.date, "MM-DD-YYYY").format('LL')
+
     return (
         <>
             <div className="py-3 md:mr-10 flex flex-col items-start rounded">
-                <h2 className="sm:text-2xl text-xl title-font font-bold text-gray-700 mt-4 mb-4 dark:text-gray-100 ">
+                <h2 className="sm:text-2xl text-xl title-font font-bold text-gray-700 mt-4 dark:text-gray-100 ">
                     {blog.data.title}
                 </h2>
+                <p className="text-justify leading-relaxed text-gray-800 mb-4 italic dark:text-gray-200">
+                    {date}
+                </p>
                 <p className="text-justify leading-relaxed mb-3 text-gray-800 dark:text-gray-200">
                     {blog.data.summary}..
                 </p>
