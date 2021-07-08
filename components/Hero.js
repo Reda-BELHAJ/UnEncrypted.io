@@ -1,5 +1,6 @@
 import Tag from './Tag'
 import BlogCard from '../Layouts/BlogCard'
+import BlogContent from '../Layouts/BlogContent'
 
 const Hero = ({blogs, tags}) => {
     
@@ -21,11 +22,13 @@ const Hero = ({blogs, tags}) => {
                             <h2 className="font-bold text-green-300 dark:text-green-500">TOP CATEGORIES</h2><br/>
                             {tags.map((item, id) => (
                                 <Tag key={id} link={`/tags/${item[0].toUpperCase()}`} tag={item[0]}/>
-                            ))}        
+                            ))}     
                         </div>
                         <div className="mb-5">
                             <h2 className="font-bold text-green-300 dark:text-green-500">POPULAR CONTENT</h2><br/>
-                            
+                            {blogs.map((item, id) => (
+                                <BlogContent key={id} title={item.data.title} />
+                            ))} 
                         </div>
                     </div>
                 </div>
