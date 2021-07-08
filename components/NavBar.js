@@ -1,6 +1,8 @@
 import Link from 'next/link';
 import { GiGreatPyramid } from "react-icons/gi";
 import { SiAboutDotMe, SiTwitter, SiGithub } from "react-icons/si";
+import { AiFillTags } from 'react-icons/ai'
+import { FaBloggerB } from 'react-icons/fa'
 import Toggle from './Toggle'
 
 const Navbar = () => {
@@ -22,6 +24,23 @@ const Navbar = () => {
                     </div>
                     <div className="flex items-center -mx-2">
                         <Toggle />
+
+                        <Link href="/blog">
+                            <a className="flex items-center mx-2 text-gray-800 dark:hover:text-green-500 hover:text-green-500 dark:text-gray-50">
+                                <span className="text-xl ">
+                                <FaBloggerB />
+                                </span>
+                            </a>
+                        </Link>
+
+                        <Link href="/tags">
+                            <a className="flex items-center mx-2 text-gray-800 dark:hover:text-green-500 hover:text-green-500 dark:text-gray-50">
+                                <span className="text-xl ">
+                                <AiFillTags />
+                                </span>
+                            </a>
+                        </Link>
+
 
                         <Link href="/about">
                             <a className="flex items-center mx-2 text-base text-gray-800 dark:hover:text-green-500 hover:text-green-500 dark:text-gray-50">
