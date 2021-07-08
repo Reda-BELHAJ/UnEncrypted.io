@@ -11,7 +11,7 @@ const BlogLayout = ({source, frontMatter}) => {
     return (
         <>
             <Head>
-                <title>UnEncrypted</title>
+                <title>UnEncrypted | {frontMatter.title}</title>
 
                 <meta itemProp="name" content="UnEncrypted" />
             </Head>

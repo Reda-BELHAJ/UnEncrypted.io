@@ -2,7 +2,7 @@ import Link from 'next/link';
 import { GiGreatPyramid } from "react-icons/gi";
 import { SiAboutDotMe, SiTwitter, SiGithub } from "react-icons/si";
 import { AiFillTags } from 'react-icons/ai'
-import { FaBloggerB } from 'react-icons/fa'
+import { ImSearch } from 'react-icons/im'
 import Toggle from './Toggle'
 
 const Navbar = () => {
@@ -27,8 +27,8 @@ const Navbar = () => {
 
                         <Link href="/blog">
                             <a className="flex items-center mx-2 text-gray-800 dark:hover:text-green-500 hover:text-green-500 dark:text-gray-50">
-                                <span className="text-xl ">
-                                <FaBloggerB />
+                                <span className="">
+                                <ImSearch />
                                 </span>
                             </a>
                         </Link>
