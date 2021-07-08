@@ -50,7 +50,9 @@ those are some constraint:
     date: "10-10-2020"
     author: "Reda BELHAJ"
     summary: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Cursus mattis molestie a iaculis at erat pellentesque adipiscing."
-    tags: ["TailwindCss","Next.js", "React.js", "Web Dev", "Test"]
+    tags: ["Tailwindcss","Next.js", "React.js", "Web dev", "Test"]
     image: "/images/TheWeeknd.jpg"
     ---
 ```
+
+3. For the tags just the first letter that has to be in uppercase the rest should be lowercase
