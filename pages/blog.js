@@ -4,7 +4,7 @@ import Navbar from '../components/Navbar'
 import ListPosts from '../Layouts/ListPosts'
 import { getAllBlogPosts } from "../Lib/mdx";
 
-export default function blog({allBlogs}){
+export default function blog({blogs}){
     return (
         <>
             <Head>
@@ -15,7 +15,7 @@ export default function blog({allBlogs}){
             <div className="bg-white dark:bg-gray-900">
                 <div className="min-h-screen relative">
                     <Navbar />
-                    <ListPosts blogs={allBlogs}/>
+                    <ListPosts title="All Posts" blogs={blogs}/>
                     <Footer />
                 </div>
             </div>
