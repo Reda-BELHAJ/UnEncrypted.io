@@ -79,11 +79,3 @@ export const getAllBlogPosts = () => {
 
   return allBlogs;
 };
-
-export function getCatBlog({tag}){
-  const Blogs = getAllBlogPosts();
-  
-  return Blogs.filter(
-    blog => blog.data.tags.includes(tag)
-  )
-}

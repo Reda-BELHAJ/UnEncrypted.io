@@ -4,23 +4,15 @@ import Header from '../components/Header'
 import Navbar from '../components/Navbar'
 import Hero from '../components/Hero'
 import { getAllBlogPosts } from "../Lib/mdx";
+import { getAllTags } from "../Lib/tags";
 
-export default function index({blogs}){
-  let tagCount = {}
-  blogs.forEach(
-    (blog) => blog.data.tags.forEach(
-        (tag) => {
-            const tagUpp = tag.toUpperCase()
-            if (tagUpp in tagCount){
-              tagCount[tagUpp] += 1
-            }
-            else {
-              tagCount[tagUpp] = 1
-            }
-        }
-    )
-  )
-  console.log(tagCount)
+export default function index({blogs, tagCount}){
+  var tags = tagCount
+
+  if (tags.length > 5){
+    tags = tagCount.slice(0, 5)
+  }
+
   return (
     <>
       <Head>
@@ -32,7 +24,7 @@ export default function index({blogs}){
         <div className="min-h-screen relative">
           <Navbar />
           <Header />
-          <Hero blogs={blogs}/>
+          <Hero blogs={blogs} tags={tags}/>
           <Footer />
         </div>
       </div>
@@ -41,8 +33,9 @@ export default function index({blogs}){
   )
 }
 
-export const getStaticProps = () => {
+export async function getStaticProps() {
   const allBlogs = getAllBlogPosts();
+  const tagCount = await getAllTags();
 
   const catBlogs = allBlogs.filter(
     blog => blog.data.tags.includes("TailwindCss")
@@ -51,6 +44,7 @@ export const getStaticProps = () => {
   return {
     props: {
       blogs: allBlogs,
+      tagCount: tagCount,
     },
   };
 };

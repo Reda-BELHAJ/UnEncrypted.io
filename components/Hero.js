@@ -1,7 +1,7 @@
 import Tag from './Tag'
 import BlogCard from '../Layouts/BlogCard'
 
-const Hero = ({blogs}) => {
+const Hero = ({blogs, tags}) => {
     
     return (
         <>
@@ -19,7 +19,9 @@ const Hero = ({blogs}) => {
                     <div className="grid grid-rows-1 md:grid-rows-2">
                         <div className="mb-5">
                             <h2 className="font-bold text-green-300 dark:text-green-500">TOP CATEGORIES</h2><br/>
-                            <Tag link="/" tag="TryHackMe"/><Tag link="/" tag="Writeup"/>
+                            {tags.map((item, id) => (
+                                <Tag key={id} link="/" tag={item[0]}/>
+                            ))}        
                         </div>
                         <div className="mb-5">
                             <h2 className="font-bold text-green-300 dark:text-green-500">POPULAR CONTENT</h2><br/>
