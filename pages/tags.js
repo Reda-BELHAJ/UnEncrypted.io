@@ -8,7 +8,7 @@ export default function tags({tagCount}){
     return (
         <>
             <Head>
-                <title>UnEncrypted</title>
+                <title>UnEncrypted | Tags</title>
 
                 <meta itemProp="name" content="UnEncrypted" />
             </Head>

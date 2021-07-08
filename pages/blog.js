@@ -8,7 +8,7 @@ export default function blog({blogs}){
     return (
         <>
             <Head>
-                <title>UnEncrypted</title>
+                <title>UnEncrypted | Blog</title>
 
                 <meta itemProp="name" content="UnEncrypted" />
             </Head>

@@ -9,7 +9,7 @@ const about = () => {
     return (
         <>
             <Head>
-                <title>UnEncrypted</title>
+                <title>UnEncrypted | About me</title>
                 <meta itemProp="name" content="UnEncrypted" />
             </Head>
             <div className="min-h-screen relative bg-white dark:bg-gray-900">
