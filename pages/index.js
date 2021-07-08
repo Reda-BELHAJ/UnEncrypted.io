@@ -5,8 +5,7 @@ import Navbar from '../components/Navbar'
 import Hero from '../components/Hero'
 import { getAllBlogPosts } from "../Lib/mdx";
 
-export default function index({blogs, catBlogs}){
-  console.log(catBlogs)
+export default function index({blogs}){
   return (
     <>
       <Head>
@@ -37,7 +36,6 @@ export const getStaticProps = () => {
   return {
     props: {
       blogs: allBlogs,
-      catBlogs: catBlogs,
     },
   };
 };
