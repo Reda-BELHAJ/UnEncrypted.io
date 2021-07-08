@@ -20,7 +20,7 @@ const Hero = ({blogs, tags}) => {
                         <div className="mb-5">
                             <h2 className="font-bold text-green-300 dark:text-green-500">TOP CATEGORIES</h2><br/>
                             {tags.map((item, id) => (
-                                <Tag key={id} link="/" tag={item[0]}/>
+                                <Tag key={id} link={`/tags/${item[0].toUpperCase()}`} tag={item[0]}/>
                             ))}        
                         </div>
                         <div className="mb-5">
