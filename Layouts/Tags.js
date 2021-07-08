@@ -14,13 +14,13 @@ const Tags = ({tags}) => {
                     {tags.map((item, id) => {
                         return (
                         <div key={id} className="mt-2 mb-2 mr-5">
-                            <Link href="/">
+                            <Link href={`/tags/${item[0]}`}>
                                 <a className="mr-3 text-sm font-medium text-green-300 dark:text-green-500 uppercase hover:text-green-500 dark:hover:text-green-300">
                                     {item[0]}
                                 </a>
                             </Link>
 
-                            <Link href="/">
+                            <Link href={`/tags/${item[0]}`}>
                                 <a className="-ml-2 text-sm font-semibold text-gray-600 uppercase dark:text-gray-300">
                                     {`(${item[1]})`}
                                 </a>

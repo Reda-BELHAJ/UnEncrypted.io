@@ -32,10 +32,32 @@ export async function getAllTags() {
     return sortable
 }
 
+export async function getTags() {
+    const blogs = await getAllBlogPosts();
+
+    let tagCount = {}
+    
+    blogs.forEach(
+        (blog) => blog.data.tags.forEach(
+            (tag) => {
+                const tagUpp = tag.toUpperCase()
+                if (tagUpp in tagCount){
+                    tagCount[tagUpp] += 1
+                }
+                else {
+                    tagCount[tagUpp] = 1
+                }
+            }
+        )
+    )
+    return tagCount
+}
+
+
 export function getCatBlog({tag}){
     const Blogs = getAllBlogPosts();
     
     return Blogs.filter(
       blog => blog.data.tags.includes(tag)
     )
-  }
+}

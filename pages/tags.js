@@ -5,6 +5,7 @@ import Tags from "../Layouts/Tags";
 import { getAllTags } from "../Lib/tags";
 
 export default function tags({tagCount}){
+
     return (
         <>
             <Head>

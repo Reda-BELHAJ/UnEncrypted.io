@@ -13,6 +13,7 @@ const ListPosts = ({title, blogs}) => {
             <h1 className="text-3xl font-extrabold leading-9 tracking-tight text-gray-900 dark:text-gray-100 sm:text-4xl sm:leading-10 md:text-6xl md:leading-14">
                 {title}
             </h1>
+            
             <div className="relative max-w-lg">
                 <input
                     aria-label="Search articles"
@@ -28,12 +29,12 @@ const ListPosts = ({title, blogs}) => {
                     viewBox="0 0 24 24"
                     stroke="currentColor"
                 >
-                <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth={2}
-                    d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
-                />
+                    <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth={2}
+                        d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
+                    />
                 </svg>
             </div>
             
@@ -45,6 +46,11 @@ const ListPosts = ({title, blogs}) => {
 
             <div className="sm:text-2xl text-xl title-font font-bold text-xl py-3 md:mr-10 flex flex-col items-start rounded text-gray-900 dark:text-gray-50">
                 {!filteredBlogPosts.length && 'No posts found.'}
+            </div>
+
+            
+            <div className="w-full text-right">
+                {filteredBlogPosts.length} Articles
             </div>
 
         </div>
