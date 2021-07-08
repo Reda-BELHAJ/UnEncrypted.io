@@ -8,6 +8,7 @@ import { getAllTags } from "../Lib/tags";
 
 export default function index({blogs, tagCount}){
   var tags = tagCount
+  blogs = blogs.slice(0, 2)
 
   if (tags.length > 5){
     tags = tagCount.slice(0, 5)
@@ -36,10 +37,6 @@ export default function index({blogs, tagCount}){
 export async function getStaticProps() {
   const allBlogs = getAllBlogPosts();
   const tagCount = await getAllTags();
-
-  const catBlogs = allBlogs.filter(
-    blog => blog.data.tags.includes("TailwindCss")
-  )
 
   return {
     props: {

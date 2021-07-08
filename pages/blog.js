@@ -1,10 +1,10 @@
 import Head from "next/head";
 import Footer from '../components/Footer'
 import Navbar from '../components/Navbar'
-import Tags from "../Layouts/Tags";
-import { getAllTags } from "../Lib/tags";
+import ListPosts from '../Layouts/ListPosts'
+import { getAllBlogPosts } from "../Lib/mdx";
 
-export default function blog({tagCount}){
+export default function blog({allBlogs}){
     return (
         <>
             <Head>
@@ -15,10 +15,20 @@ export default function blog({tagCount}){
             <div className="bg-white dark:bg-gray-900">
                 <div className="min-h-screen relative">
                     <Navbar />
-                    
+                    <ListPosts blogs={allBlogs}/>
                     <Footer />
                 </div>
             </div>
         </>
     )
 }
+
+export async function getStaticProps() {
+    const allBlogs = getAllBlogPosts();
+  
+    return {
+      props: {
+        blogs: allBlogs,
+      },
+    };
+  };
