@@ -6,6 +6,21 @@ import Hero from '../components/Hero'
 import { getAllBlogPosts } from "../Lib/mdx";
 
 export default function index({blogs}){
+  let tagCount = {}
+  blogs.forEach(
+    (blog) => blog.data.tags.forEach(
+        (tag) => {
+            const tagUpp = tag.toUpperCase()
+            if (tagUpp in tagCount){
+              tagCount[tagUpp] += 1
+            }
+            else {
+              tagCount[tagUpp] = 1
+            }
+        }
+    )
+  )
+  console.log(tagCount)
   return (
     <>
       <Head>
