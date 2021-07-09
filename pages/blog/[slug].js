@@ -1,4 +1,4 @@
-import { getAllPostSlugs, getPostdata } from "../../Lib/mdx";
+import { getSlugs, getPostdata } from "../../Lib/mdx";
 import matter from "gray-matter";
 import BlogLayout from "../../Layouts/BlogLayout";
 
@@ -11,9 +11,13 @@ export default function Posts({ source, frontMatter }) {
 }
 
 export async function getStaticPaths() {
-  const paths = getAllPostSlugs();
+  const slugs = await getSlugs();
   return {
-    paths,
+    paths: slugs.map((p) => ({
+      params: {
+        slug: p.replace(/\.mdx/, '')
+      }
+    })),
     fallback: false
   };
 }
