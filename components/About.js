@@ -3,6 +3,7 @@ import { FiLinkedin } from "react-icons/fi";
 import { GrMail } from "react-icons/gr";
 import MarqueeSec from "./MarqueeSec";
 import {information} from '../Data/informationAboutMe'
+import Image from 'next/image'
 
 const About = () => {
     return (
@@ -17,9 +18,11 @@ const About = () => {
                     <div className="border-t border-green-300 dark:border-green-500">
                         <div className="items-start space-y-2 xl:grid xl:grid-cols-3 xl:gap-x-8 xl:space-y-0">
                             <div className="flex flex-col items-center pt-8 space-x-2">
-                                <img
+                                <Image
                                     src="https://avatars.githubusercontent.com/u/58605073?v=4"
                                     alt="avatar"
+                                    width={192}
+                                    height={192}
                                     className="w-48 h-48 rounded-full"
                                 />
                                 <h3 className="pt-4 pb-2 text-2xl font-bold leading-8 tracking-tight text-gray-900 dark:text-gray-50">
