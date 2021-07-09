@@ -23,7 +23,7 @@ function BlogCard({ blog }) {
                             blog.data.title.split(" ").join("-").toLowerCase()
                         )}`}
                     >
-                    <a className="text-green-300 dark:text-green-500 inline-flex items-center">
+                    <a className="font-bold text-green-300 dark:text-green-500 inline-flex items-center">
                         Learn More{" "}
                         <span className="pl-1">
                             <AiOutlineArrowRight />

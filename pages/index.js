@@ -14,6 +14,8 @@ export default function index({blogs, tagCount}){
     tags = tagCount.slice(0, 5)
   }
 
+  const popBlogs = blogs.slice(0, 5)
+
   return (
     <>
       <Head>
@@ -25,7 +27,7 @@ export default function index({blogs, tagCount}){
         <div className="min-h-screen relative">
           <Navbar />
           <Header />
-          <Hero blogs={blogs} tags={tags}/>
+          <Hero blogs={blogs} popBlogs={popBlogs} tags={tags}/>
           <Footer />
         </div>
       </div>
