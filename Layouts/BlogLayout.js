@@ -42,7 +42,7 @@ const BlogLayout = ({source, frontMatter}) => {
                                 <BsThreeDots />
                             </p>
 
-                            <div className="prose prose-green md:prose-lg lg:prose-xl text-gray-900 dark:text-gray-50">
+                            <div className="prose prose-green max-w-none md:prose-lg lg:prose-xl text-gray-900 dark:text-gray-50">
                                 <h1 className="text-gray-900 dark:text-gray-50">
                                     {frontMatter.title}
                                 </h1>
