@@ -32,7 +32,7 @@ const BlogLayout = ({source, frontMatter}) => {
                                 <div className="flex justify-around">
                                     {
                                         frontMatter.tags.map((item, id)=> (
-                                            <Tag key={id} link="/" tag={item}/>
+                                            <Tag key={id} link={`/tags/${item[0].toUpperCase()}`} tag={item}/>
                                         ))
                                     }
                                 </div>
