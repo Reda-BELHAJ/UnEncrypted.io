@@ -41,10 +41,6 @@ export const getSortedPosts = () => {
   });
 };
 
-export async function getSlugs(){
-  return fs.readdirSync(postDirectory);
-} 
-
 export const getAllPostSlugs = () => {
   const fileNames = fs.readdirSync(postDirectory);
 
