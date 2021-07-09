@@ -38,7 +38,7 @@ const Header = () => {
                                 {" "}Reda BELHAJ {" "}
                             </a>
                         </Link>
-                        a third year Computer Science Student at the International University of Rabat. 
+                        a fourth year Computer Science Student at the International University of Rabat. 
                         Welcome to my corner of the internet. I&apos;m glad you&apos;re here!
                     </p>
                 </div>
