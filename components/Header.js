@@ -32,14 +32,14 @@ const Header = () => {
                     </h1>
 
                     <p className="px-0 mb-8 text-lg text-gray-600 md:text-xl lg:px-24 dark:text-gray-400">
-                        👋 Hey There, I'm 
+                        👋 Hey There, I&apos;m 
                         <Link href="/about">
                             <a className="font-bold hover:text-green-500">
                                 {" "}Reda BELHAJ {" "}
                             </a>
                         </Link>
                         a third year Computer Science Student at the International University of Rabat. 
-                        Welcome to my corner of the internet. I'm glad you're here!
+                        Welcome to my corner of the internet. I&apos;m glad you&apos;re here!
                     </p>
                 </div>
                 <div className="border-t border-green-300 dark:border-green-500 mb-1" />
