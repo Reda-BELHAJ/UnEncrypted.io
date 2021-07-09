@@ -29,10 +29,10 @@ const BlogLayout = ({source, frontMatter}) => {
                             />
 
                             <div className="my-4 flex flex-col items-center">
-                                <div className="flex justify-around">
+                                <div className="justify-around">
                                     {
                                         frontMatter.tags.map((item, id)=> (
-                                            <Tag key={id} link={`/tags/${item[0].toUpperCase()}`} tag={item}/>
+                                            <Tag key={id} link={`/tags/${item.toUpperCase()}`} tag={item}/>
                                         ))
                                     }
                                 </div>
