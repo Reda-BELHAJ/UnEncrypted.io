@@ -12,6 +12,7 @@ export default function Posts({ source, frontMatter }) {
 
 export async function getStaticPaths() {
   const slugs = await getSlugs();
+  console.log(slugs)
   return {
     paths: slugs.map((p) => ({
       params: {
