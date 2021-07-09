@@ -47,7 +47,7 @@ export const getAllPostSlugs = () => {
   return fileNames.map((filename) => {
     return {
       params: {
-        slug: filename.replace(".mdx", "")
+        slug: filename.replace(/\.mdx/, '')
       }
     };
   });
