@@ -62,7 +62,7 @@ const BlogLayout = ({source, frontMatter}) => {
                             </div>
                         </div>
                         
-                        <BlogShare />
+                        <BlogShare frontMatter={frontMatter} />
                     </div>
                     
                     <Footer />

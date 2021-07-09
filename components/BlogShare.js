@@ -1,6 +1,6 @@
 import { FaTwitter } from "react-icons/fa";
 
-function BlogShare() {
+function BlogShare({frontMatter}) {
   return (
     <>
       <div className="text-center pt-5">
@@ -10,7 +10,11 @@ function BlogShare() {
             className="twitter-share-button"
             rel="noopener noreferrer"
             target="_blank"
-            href=""
+            href={`https://twitter.com/intent/tweet?text=${
+              frontMatter.title
+            } by @RedatoB&url=/blog/${
+              frontMatter.title.split(" ").join("-").toLowerCase()
+            }&hashtags=${frontMatter.tags}`}
           >
             Tweet
           </a>
