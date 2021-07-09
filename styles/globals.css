@@ -18,3 +18,18 @@
 ::-webkit-scrollbar-thumb:hover{ background: #10b981; }
 
 ::-webkit-scrollbar-corner { background: #10b981;}
+
+.blogLayout h2{
+    @apply text-gray-900;
+    @apply dark:text-gray-50;
+}
+
+.blogLayout strong{
+    @apply text-gray-900;
+    @apply dark:text-gray-50;
+}
+
+.blogLayout blockquote{
+    @apply text-gray-900;
+    @apply dark:text-gray-50;
+}

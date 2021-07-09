@@ -46,7 +46,7 @@ const BlogLayout = ({source, frontMatter}) => {
                                 <h1 className="text-gray-900 dark:text-gray-50">
                                     {frontMatter.title}
                                 </h1>
-                                <div>
+                                <div className="blogLayout">
                                     <Markdown children={source} />
                                 </div>
                             </div>

@@ -4,8 +4,8 @@ import {TiArrowRightThick} from 'react-icons/ti'
 const BlogContent = ({title}) => {
     return (
         <>
-            <div className="my-5 grid grid-cols-2">
-                <div className="w-auto">
+            <div className="my-5 space-x-4">
+                <div className="inline-block">
                     <Link 
                         href={`/blog/${String(
                             title.split(" ").join("-").toLowerCase()
@@ -16,12 +16,12 @@ const BlogContent = ({title}) => {
                     </Link>
                 </div>
                 
-                <div>
+                <div className="inline-block">
                     <Link 
                         href={`/blog/${String(
                             title.split(" ").join("-").toLowerCase()
                         )}`}>
-                        <a className="font-bold text-green-300 dark:text-green-500">
+                        <a className="font-bold text-gray-700 dark:text-gray-100">
                             {title}
                         </a>
                     </Link>
