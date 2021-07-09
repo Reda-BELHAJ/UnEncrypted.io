@@ -1,5 +1,5 @@
 import Markdown from 'markdown-to-jsx';
-import Navbar from '../components/Navbar'
+import Navbar from '../components/NavBar'
 import Footer from '../components/Footer'
 import BlogShare from '../components/BlogShare';
 import Tag from '../components/Tag'

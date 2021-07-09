@@ -1,5 +1,5 @@
 import Footer from '../components/Footer'
-import Navbar from '../components/Navbar'
+import Navbar from '../components/NavBar'
 import About from '../components/About'
 import Tracks from '../components/Tracks'
 import Head from "next/head";

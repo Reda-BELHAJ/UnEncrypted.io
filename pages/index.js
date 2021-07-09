@@ -1,7 +1,7 @@
 import Head from "next/head";
 import Footer from '../components/Footer'
 import Header from '../components/Header'
-import Navbar from '../components/Navbar'
+import Navbar from '../components/NavBar'
 import Hero from '../components/Hero'
 import { getAllBlogPosts } from "../Lib/mdx";
 import { getAllTags } from "../Lib/tags";

@@ -1,6 +1,6 @@
 import Head from "next/head";
 import Footer from '../components/Footer'
-import Navbar from '../components/Navbar'
+import Navbar from '../components/NavBar'
 import ListPosts from '../Layouts/ListPosts'
 import { getAllBlogPosts } from "../Lib/mdx";
 
