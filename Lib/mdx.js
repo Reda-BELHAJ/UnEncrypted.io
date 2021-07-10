@@ -75,7 +75,7 @@ export const getAllBlogPosts = () => {
   allBlogs.sort(function(a, b) {
     var dateA = new Date(a.data.date), dateB = new Date(b.data.date);
     return dateB - dateA;
-});
+  });
 
   return allBlogs;
 };
