@@ -22,7 +22,7 @@ const Header = () => {
                     <h1 className="mb-8 text-4xl font-bold leading-none tracking-normal text-gray-900 md:text-6xl md:tracking-tight dark:text-gray-50">
                     <motion.div initial="hidden" animate="visible" variants={variants}>
                         <span>Decide</span>{" "}
-                        <span className="block w-full py-2 text-transparent bg-clip-text leading-12 bg-gradient-to-r from-green-300 to-green-600 lg:inline">
+                        <span className="block w-full py-2 text-transparent bg-clip-text leading-12 bg-gradient-to-r from-green-100 to-green-800 via-green-500 animate-gradient-x lg:inline">
                             Learn
                         </span>{" "}
                         <span>Share 🔗</span>
