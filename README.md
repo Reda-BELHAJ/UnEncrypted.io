@@ -1,6 +1,6 @@
 # UnEncrypted.io
 
-Unencrypted is my personal slice of the internet that provides a platform for my writing and to showcase my latest work.
+Unencrypted is my personal slice of the internet that provides a platform for my writing and to showcase my latest work. Supports dark mode and easy to write blogs using markdown. So In this article, I'm going to break down how my blog works and why i build it.
 
 ## Running Locally
 
