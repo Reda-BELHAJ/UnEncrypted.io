@@ -5,11 +5,33 @@ import Navbar from '../components/NavBar'
 import Hero from '../components/Hero'
 import { getAllBlogPosts } from "../Lib/mdx";
 import { getAllTags } from "../Lib/tags";
+import useSWR from 'swr';
+import fetcher from "../Lib/fetcher";
 
 export default function index({blogs, tagCount}){
   var tags = tagCount
 
-  const popBlogs = blogs.slice(0, 5)
+  const slugViews = []
+
+  blogs.map((item) => {
+    const slug = item.data.title.split(" ").join("-").toLowerCase()
+    const { data } = useSWR(`/api/views/${slug}`, fetcher);
+    const views = data?.total;
+    slugViews.push({ item, views });
+  });
+
+  slugViews.sort(function (a, b) {
+    return b.views - a.views;
+  });
+
+  const blogsPop = []
+
+  slugViews.map((item) => {
+    blogsPop.push(item.item)
+  })
+
+  const popBlogs = blogsPop.slice(0, 7)
+
   blogs = blogs.slice(0, 2)
 
   if (tags.length > 5){

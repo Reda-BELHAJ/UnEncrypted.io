@@ -6,6 +6,7 @@ import Tag from '../components/Tag'
 import { BsThreeDots } from "react-icons/bs";
 import Back from '../components/BackArrow';
 import Head from "next/head";
+import ViewCounter from '../components/ViewCounter';
 
 const BlogLayout = ({source, frontMatter}) => {
     return (
@@ -58,6 +59,9 @@ const BlogLayout = ({source, frontMatter}) => {
                                 <p className="text-2xl pb-2">Thanks for reading!!!</p>
                                 <p className="mx-2 font-semibold text-gray-700 dark:text-gray-100">
                                     {frontMatter.author}
+                                </p>
+                                <p className="mx-2 font-semibold text-gray-700 dark:text-gray-100">
+                                    <ViewCounter slug={frontMatter.title.split(" ").join("-").toLowerCase()} />
                                 </p>
                             </div>
                         </div>
