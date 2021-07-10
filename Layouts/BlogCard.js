@@ -15,7 +15,7 @@ function BlogCard({ blog }) {
                     {date}
                 </p>
                 <p className="text-justify leading-relaxed mb-3 text-gray-800 dark:text-gray-200">
-                    {blog.data.summary}..
+                    {blog.data.summary}
                 </p>
                 <div className="flex items-center flex-wrap pb-2 border-b-2 border-green-300 mt-auto w-full justify-between dark:border-green-500">
                     <Link
