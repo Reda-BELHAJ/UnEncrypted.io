@@ -1,0 +1,88 @@
+---
+title: "How I Built My Blog"
+date: "07-10-2021"
+author: "Reda BELHAJ"
+summary: "My personal blog page build with Next.js and Tailwind Css which takes the content from makdown files and renders it using Next.js. Supports dark mode and easy to write blogs using markdown. So In this article, I'm going to break down how my blog works and why i build it"
+tags: ["Tailwindcss","Next.js", "React.js", "Web dev"]
+image: "/images/nextJS.jpeg"
+---
+
+## Introduction
+
+I've always wanted to build my very own ***Blog*** to showcase some of my works and my writeups 😋
+
+The main idea behind this project is to create a static site generator that will combine all of my blog posts into a single, deployable website. So before I started building 🤸, I had to answer a few questions.
+
+1. How will I write my blogposts?
+2. What technologies will I use for the blog?
+3. How will I deploy the blog?
+
+In the end I choose [Next.Js](https://nextjs.org/) and [Vercel](https://vercel.com/home) as a hosting platform. And I am going to give you an overview what you can build using this technologies and how I did it.
+
+> Let's get started
+
+## Deciding on a Tech Stack
+
+This blog is a Next.js application.
+
+**Next.js** (The React Framework for Production) gives you the best developer experience with all the features you need for production: hybrid static & server rendering, TypeScript support, smart bundling, route pre-fetching, and more. No config needed.
+
+This blog is hosted on **Vercel**. I chose them because they are the creators of Next.js, which I assumed would be well-optimized. To be honest, their platform is fantastic.
+
+Those are some of the keys of this project:
+
+- [Next.js](https://nextjs.org/)
+- [Vercel](https://vercel.com/home)
+- [TailwindCss](https://tailwindcss.com/)
+- [Markdown](https://www.markdownguide.org/)
+- [Framer Motion](https://www.framer.com/motion/)
+- [Git](https://git-scm.com/)
+
+and other plugins and dependencies like (`react-icons`, `use-sound`, `gray-matter` etc...)
+
+## Gathering Inspiration
+
+When I figured out the tech stack that i will use, it was time to decide what I wanted my site to be. I took notes of dozens of personal sites that I liked, but these were the main reference points for me:
+
+- [Braydon Coyer](https://braydoncoyer.dev/)
+- [Josh Comeau](https://www.joshwcomeau.com/)
+- [Lee Rob](https://leerob.io/blog)
+- [Tania Raschia](https://www.taniarascia.com/)
+- [Conor Dewey](https://www.conordewey.com/)
+
+## Capturing Post Metadata
+
+Some of information about the post are defined as YAML-formatted metadata, for Example:
+
+```Markdown
+---
+title: "How I Built My Blog"
+date: "07-10-2021"
+author: "Reda BELHAJ"
+summary: "My personal blog page build with Next.js and Tailwind Css which takes the content from makdown files and renders it using Next.js. Supports dark mode and easy to write blogs using markdown. So In this article, I'm going to break down how my blog works and why i build it"
+tags: ["Tailwindcss","Next.js", "React.js", "Web dev"]
+image: "/images/nextJS.jpg"
+---
+Lorem Ipsum ...
+```
+On my blog i use `gray-matter` and it converts a string with front-matter into an object like this:
+
+```
+{
+  content: 'Lorem Ipsum ...',
+  data: { 
+    title: 'How I Built My Blog', 
+    date: '07-10-2021',
+    author: 'Reda BELHAJ',
+    ...
+  }
+}
+```
+
+There is a ***compile*** stage when utilizing Markdown in a web application; the Markdown must be translated into HTML so that it can be interpreted by the browser.
+
+## Hosting on Vercel
+
+Vercel enables developers to host websites and web services that deploy instantly and scale automatically, but also provides more features like instances for building website (CI/CD feature). For the steps on how to setup your vercel application it's very simple, For more information you can find their documentation [Here](https://vercel.com/docs).
+
+These are just a few of the features I've added to the site, and I want to continue expanding it as my needs evolve, but for now, these are all I need to get started blogging 😄

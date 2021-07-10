@@ -4,7 +4,7 @@ import {TiArrowRightThick} from 'react-icons/ti'
 const BlogContent = ({title}) => {
     return (
         <>
-            <div className="my-5 space-x-4">
+            <div className="mb-5 space-x-4">
                 <div className="inline-block">
                     <Link 
                         href={`/blog/${String(

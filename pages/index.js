@@ -8,13 +8,13 @@ import { getAllTags } from "../Lib/tags";
 
 export default function index({blogs, tagCount}){
   var tags = tagCount
+
+  const popBlogs = blogs.slice(0, 5)
   blogs = blogs.slice(0, 2)
 
   if (tags.length > 5){
     tags = tagCount.slice(0, 5)
   }
-
-  const popBlogs = blogs.slice(0, 5)
 
   return (
     <>
