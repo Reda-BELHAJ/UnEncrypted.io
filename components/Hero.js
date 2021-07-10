@@ -17,14 +17,14 @@ const Hero = ({blogs, popBlogs, tags}) => {
                             </div>
                         ))}
                     </div>
-                    <div className="grid grid-rows-1 md:grid-rows-2">
-                        <div className="mb-5">
+                    <div className="grid grid-rows-1 md:grid-rows-3">
+                        <div className="mb-5 h-auto">
                             <h2 className="font-bold text-green-300 dark:text-green-500">TOP CATEGORIES</h2><br/>
                             {tags.map((item, id) => (
                                 <Tag key={id} link={`/tags/${item[0].toUpperCase()}`} tag={item[0]}/>
                             ))}     
                         </div>
-                        <div className="mb-5">
+                        <div className="md:row-span-2 mb-5">
                             <h2 className="font-bold text-green-300 dark:text-green-500">POPULAR CONTENT</h2><br/>
                             {popBlogs.map((item, id) => (
                                 <BlogContent key={id} title={item.data.title} />
