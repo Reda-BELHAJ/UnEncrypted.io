@@ -19,7 +19,7 @@
 
 ::-webkit-scrollbar-corner { background: #10b981;}
 
-.blogLayout h2, .blogLayout blockquote, .blogLayout code, .blogLayout strong{
+.blogLayout h2, .blogLayout h3, .blogLayout th, .blogLayout blockquote, .blogLayout code, .blogLayout strong{
     @apply text-gray-900;
     @apply dark:text-gray-50;
 }

