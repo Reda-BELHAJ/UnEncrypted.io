@@ -75,11 +75,13 @@ cat /home/charlie/user.txt
 ## Privilege Escalation
 
 I typed the famous:
+
 ```
 sudo -l
 ```
 
 and it returned:
+
 ```
 User charlie may run the following commands on chocolate-factory:
     (ALL : !root) NOPASSWD: /usr/bin/vi
@@ -87,16 +89,19 @@ User charlie may run the following commands on chocolate-factory:
 ```
 
 So i run the command sa root and i typed 
+
 ```
 :shell
 ```
 
 And i tried to find the root flag by :
+
 ```
 find / root.txt
 ```
 
 and i found: /root/root.py and I typed the key that i found in the first question:
+
 ```
 flag{cec5916*************************}
 ```
