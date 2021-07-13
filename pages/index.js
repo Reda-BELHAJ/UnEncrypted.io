@@ -42,7 +42,6 @@ export default function index({blogs, tagCount}){
   return (
     <>
       <Head>
-        <html lang="en" />
         <title>UnEncrypted</title>
         <meta itemProp="name" content="UnEncrypted" />
         <meta name="description" content="UnEncrypted is a personal blog page build with Next.js and Tailwind Css which takes the content from makdown files and renders it using Next.js." />
@@ -53,6 +52,7 @@ export default function index({blogs, tagCount}){
           imageURL= "/images/Meta/UnEncrypted.jpg"
           imageALT= "/images/Meta/UnEncrypted.jpg" />
       </Head>
+
       <div className="bg-white dark:bg-gray-900">
         <div className="min-h-screen relative">
           <Navbar />
