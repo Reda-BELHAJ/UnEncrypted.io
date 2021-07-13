@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://unencrypted.vercel.app/api/sitemap
