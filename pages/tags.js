@@ -13,6 +13,7 @@ export default function tags({tagCount}){
                 <title>UnEncrypted | Tags</title>
                 <meta itemProp="name" content="UnEncrypted" />
                 <meta name="description" content="UnEncrypted is a personal blog page build with Next.js and Tailwind Css which takes the content from makdown files and renders it using Next.js." />
+                <meta name="viewport" content="width=device-width, initial-scale=1.0" />
                 <Helmet 
                     title= "UnEncrypted | Tags" 
                     description= "UnEncrypted is a personal blog page build with Next.js and Tailwind Css which takes the content from makdown files and renders it using Next.js." 
