@@ -11,7 +11,7 @@ const Navbar = () => {
             <div className="container mx-auto px-6 py-4">
                 <div className="flex items-center justify-between">
                     <div>
-                    <Link href="/">
+                    <Link href="/" aria-label="Home">
                         <a className="flex items-center hover:text-green-500 dark:hover:text-green-500 text-gray-800 dark:text-gray-50">
                             <span className="text-xl font-semibold">
                                 <GiGreatPyramid />
@@ -25,7 +25,7 @@ const Navbar = () => {
                     <div className="flex items-center -mx-2">
                         <Toggle />
 
-                        <Link href="/blog">
+                        <Link href="/blog" aria-label="Blog">
                             <a className="flex items-center mx-2 text-gray-800 dark:hover:text-green-500 hover:text-green-500 dark:text-gray-50">
                                 <span className="">
                                 <ImSearch />
@@ -33,7 +33,7 @@ const Navbar = () => {
                             </a>
                         </Link>
 
-                        <Link href="/tags">
+                        <Link href="/tags" aria-label="Tags">
                             <a className="flex items-center mx-2 text-gray-800 dark:hover:text-green-500 hover:text-green-500 dark:text-gray-50">
                                 <span className="text-xl ">
                                 <AiFillTags />
@@ -42,7 +42,7 @@ const Navbar = () => {
                         </Link>
 
 
-                        <Link href="/about">
+                        <Link href="/about" aria-label="About Me">
                             <a className="flex items-center mx-2 text-base text-gray-800 dark:hover:text-green-500 hover:text-green-500 dark:text-gray-50">
                                 <span className="text-xl ">
                                 <SiAboutDotMe />
@@ -50,7 +50,8 @@ const Navbar = () => {
                             </a>
                         </Link>
 
-                        <a
+                        <a 
+                            aria-label="Twitter"
                             className="flex items-center mx-2 text-gray-900 dark:hover:text-green-500 hover:text-green-500 dark:text-gray-50"
                             href="https://twitter.com/RedatoB"
                             rel="noopener noreferrer"
@@ -60,6 +61,7 @@ const Navbar = () => {
                         </a>
 
                         <a
+                            aria-label="Github"
                             className="flex items-center mx-2 text-gray-900 dark:hover:text-green-500 hover:text-green-500 dark:text-gray-50"
                             href="https://github.com/Reda-BELHAJ"
                             rel="noopener noreferrer"
