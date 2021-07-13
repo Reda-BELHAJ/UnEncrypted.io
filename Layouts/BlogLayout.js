@@ -13,8 +13,12 @@ const BlogLayout = ({source, frontMatter}) => {
         <>
             <Head>
                 <title>UnEncrypted | {frontMatter.title}</title>
-
                 <meta itemProp="name" content="UnEncrypted" />
+                <Helmet 
+                    title= {`UnEncrypted | ${frontMatter.title}`}
+                    description= {frontMatter.summary}
+                    imageURL= {frontMatter.image}
+                    imageALT= {frontMatter.image} />
             </Head>
             <div className="bg-white dark:bg-gray-900">
                 <div className="min-h-screen relative">

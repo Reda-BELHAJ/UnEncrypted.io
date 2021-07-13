@@ -15,9 +15,13 @@ export default function Tag({ blogs, tag }) {
     return (
       <>
         <Head>
-            <title>UnEncrypted | Tag</title>
-
+            <title>UnEncrypted | {title}</title>
             <meta itemProp="name" content="UnEncrypted" />
+            <Helmet 
+                    title= {`UnEncrypted | ${title}`}
+                    description= "UnEncrypted is a personal blog page build with Next.js and Tailwind Css which takes the content from makdown files and renders it using Next.js." 
+                    imageURL= "/images/Meta/UnEncrypted.jpg"
+                    imageALT= "/images/Meta/UnEncrypted.jpg" />
         </Head>
         <div className="bg-white dark:bg-gray-900">
             <div className="min-h-screen relative">
