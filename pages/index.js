@@ -47,8 +47,8 @@ export default function index({blogs, tagCount}){
         <Helmet 
           title= "UnEncrypted" 
           description= "UnEncrypted is a personal blog page build with Next.js and Tailwind Css which takes the content from makdown files and renders it using Next.js." 
-          imageURL= "/images/nextJS.jpeg"
-          imageALT= "/images/nextJS.jpeg" />
+          imageURL= "/images/UnEncrypted.jpeg"
+          imageALT= "/images/UnEncrypted.jpeg" />
       </Head>
       <div className="bg-white dark:bg-gray-900">
         <div className="min-h-screen relative">
