@@ -19,6 +19,7 @@ const Tag = ({tag, link}) => {
         <>
             <Link href={link}>
                 <a 
+                    aria-label={link}
                     onMouseOver={handleClick}
                     className="text-xs inline-flex items-center font-bold leading-sm uppercase px-3 py-1 bg-green-300 dark:bg-green-500 hover:bg-green-500 dark:hover:bg-green-300 text-grey-300 rounded-full m-1">
                     {tag}
