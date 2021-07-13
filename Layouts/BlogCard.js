@@ -31,14 +31,14 @@ function BlogCard({ blog }) {
                             blog.data.title.split(" ").join("-").toLowerCase()
                         )}`}
                     >
-                    <a className="font-bold text-green-300 dark:text-green-500 inline-flex items-center">
+                    <a aria-label={blog.data.title} className="font-bold text-green-300 dark:text-green-500 inline-flex items-center">
                         Learn More{" "}
                         <span className="pl-1">
                             <AiOutlineArrowRight />
                         </span>
                     </a>
                     </Link>
-                    <a className="inline-flex items-center">
+                    <span className="inline-flex items-center">
                         <span className="flex-grow flex flex-col pl-4">
                             <span className="title-font font-medium text-sm text-green-300 dark:text-green-500">
                                 {blog.data.author}
@@ -50,7 +50,7 @@ function BlogCard({ blog }) {
                                 {`${views ? new Number(views).toLocaleString() : '–––'} views`}
                             </span>
                         </span>
-                    </a>
+                    </span>
                 </div>
             </div>
         </>
