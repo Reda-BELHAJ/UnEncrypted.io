@@ -4,10 +4,11 @@ import { Readable } from 'stream'
 
 export default async (req, res) => {
     try {
+        console.log("Hello");
         // An array with your links
         const links = [];
         const posts = getAllPostSlugs();
-        
+
         posts.map((post) => {
             links.push({
             url: `/blog/${post.params.slug}`,
