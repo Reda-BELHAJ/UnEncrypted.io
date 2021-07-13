@@ -7,6 +7,7 @@ import { BsThreeDots } from "react-icons/bs";
 import Back from '../components/BackArrow';
 import Head from "next/head";
 import ViewCounter from '../components/ViewCounter';
+import Helmet from "../components/Helmet";
 
 const BlogLayout = ({source, frontMatter}) => {
     return (

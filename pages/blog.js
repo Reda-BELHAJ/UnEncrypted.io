@@ -3,6 +3,7 @@ import Footer from '../components/Footer'
 import Navbar from '../components/NavBar'
 import ListPosts from '../Layouts/ListPosts'
 import { getAllBlogPosts } from "../Lib/mdx";
+import Helmet from "../components/Helmet";
 
 export default function blog({blogs}){
     return (

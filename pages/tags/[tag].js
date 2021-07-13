@@ -4,6 +4,7 @@ import Navbar from '../../components/NavBar'
 import ListPosts from '../../Layouts/ListPosts'
 import { getTags } from "../../Lib/tags";
 import { getAllBlogPosts } from "../../Lib/mdx";
+import Helmet from "../../components/Helmet";
 
 export default function Tag({ blogs, tag }) {
     const title = tag.charAt(0) + tag.slice(1).toLowerCase()
@@ -18,10 +19,10 @@ export default function Tag({ blogs, tag }) {
             <title>UnEncrypted | {title}</title>
             <meta itemProp="name" content="UnEncrypted" />
             <Helmet 
-                    title= {`UnEncrypted | ${title}`}
-                    description= "UnEncrypted is a personal blog page build with Next.js and Tailwind Css which takes the content from makdown files and renders it using Next.js." 
-                    imageURL= "/images/Meta/UnEncrypted.jpg"
-                    imageALT= "/images/Meta/UnEncrypted.jpg" />
+                title= {`UnEncrypted | ${title}`}
+                description= "UnEncrypted is a personal blog page build with Next.js and Tailwind Css which takes the content from makdown files and renders it using Next.js." 
+                imageURL= "/images/Meta/UnEncrypted.jpg"
+                imageALT= "/images/Meta/UnEncrypted.jpg" />
         </Head>
         <div className="bg-white dark:bg-gray-900">
             <div className="min-h-screen relative">

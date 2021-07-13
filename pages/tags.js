@@ -3,6 +3,7 @@ import Footer from '../components/Footer'
 import Navbar from '../components/NavBar'
 import Tags from "../Layouts/Tags";
 import { getAllTags } from "../Lib/tags";
+import Helmet from "../components/Helmet";
 
 export default function tags({tagCount}){
 
