@@ -13,6 +13,7 @@ const BlogLayout = ({source, frontMatter}) => {
     return (
         <>
             <Head>
+                <html lang="en" />
                 <title>UnEncrypted | {frontMatter.title}</title>
                 <meta itemProp="name" content="UnEncrypted" />
                 <meta name="description" content={frontMatter.summary}/>
