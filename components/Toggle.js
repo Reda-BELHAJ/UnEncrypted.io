@@ -31,6 +31,7 @@ const Toggle = () => {
 
     return (
         <button
+              aria-label="Switch Mode"
               className="flex items-center mx-2 text-base dark:hover:text-green-500 text-gray-800 hover:text-green-500 dark:text-gray-50"
               onClick={() => {
                 toggleTheme()
