@@ -1,7 +1,6 @@
 import { getAllPostSlugs } from '../../Lib/mdx'
-
-const { SitemapStream, streamToPromise } = require("sitemap");
-const { Readable } = require("stream");
+import { SitemapStream, streamToPromise } from 'sitemap'
+import { Readable } from 'stream'
 
 export default async (req, res) => {
     try {
@@ -39,7 +38,7 @@ export default async (req, res) => {
         ).then((data) => data.toString());
     
         res.end(xmlString);
-        
+
     } catch (e) {
         console.log(e);
         res.send(JSON.stringify(e));
