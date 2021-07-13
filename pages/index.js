@@ -44,6 +44,7 @@ export default function index({blogs, tagCount}){
       <Head>
         <title>UnEncrypted</title>
         <meta itemProp="name" content="UnEncrypted" />
+        <meta name="description" content="UnEncrypted is a personal blog page build with Next.js and Tailwind Css which takes the content from makdown files and renders it using Next.js." />
         <Helmet 
           title= "UnEncrypted" 
           description= "UnEncrypted is a personal blog page build with Next.js and Tailwind Css which takes the content from makdown files and renders it using Next.js." 

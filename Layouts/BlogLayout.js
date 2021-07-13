@@ -15,6 +15,7 @@ const BlogLayout = ({source, frontMatter}) => {
             <Head>
                 <title>UnEncrypted | {frontMatter.title}</title>
                 <meta itemProp="name" content="UnEncrypted" />
+                <meta name="description" content={frontMatter.summary}/>
                 <Helmet 
                     title= {`UnEncrypted | ${frontMatter.title}`}
                     description= {frontMatter.summary}
