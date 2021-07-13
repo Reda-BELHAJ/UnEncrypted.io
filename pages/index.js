@@ -3,6 +3,7 @@ import Footer from '../components/Footer'
 import Header from '../components/Header'
 import Navbar from '../components/NavBar'
 import Hero from '../components/Hero'
+import Helmet from "../components/Helmet";
 import { getAllBlogPosts } from "../Lib/mdx";
 import { getAllTags } from "../Lib/tags";
 import useSWR from 'swr';
@@ -42,8 +43,8 @@ export default function index({blogs, tagCount}){
     <>
       <Head>
         <title>UnEncrypted</title>
-
         <meta itemProp="name" content="UnEncrypted" />
+        <Helmet />
       </Head>
       <div className="bg-white dark:bg-gray-900">
         <div className="min-h-screen relative">
