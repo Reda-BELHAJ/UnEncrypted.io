@@ -1,0 +1,78 @@
+---
+title: "Couch TryHackMe"
+date: "07-13-2021"
+author: "Reda BELHAJ"
+summary: "Couch is a TryHackMe room created by stuxnet"
+tags: ["Tryhackme", "Ctf", "Writeup", "Couchdb"]
+image: "/images/Couch/Couch.jpg"
+---
+
+## Enumeration
+### Nmap Scan
+
+![Scan image](/images/Couch/scan.jpg)
+
+![Scan 2 image](/images/Couch/scan2.jpg)
+
+It's my first time hearing about CouchDB and i found out that it's an open source [NoSQL](https://searchdatamanagement.techtarget.com/definition/NoSQL-Not-Only-SQL) database based on common standards to facilitate Web accessibility and compatibility with a variety of devices [...](https://searchdatamanagement.techtarget.com/definition/CouchDB)
+
+Scan the machine. How many ports are open? `2`
+What is the database management system installed on the server? `couchdb`
+What port is the database management system running on? `5984`
+What is the version of the management system installed on the server? `1.6.1`
+
+Browsing to ***http://10.10.123.150:5984/*** gives us the following JSON message:
+
+```
+{"couchdb":"Welcome","uuid":"ef680bb740692240059420b2c17db8f3","version":"1.6.1","vendor":{"version":"16.04","name":"Ubuntu"}}
+```
+
+### Search Exploit
+
+![SS image](/images/Couch/searchsploit.jpg)
+
+Since it was the first time hearing about ***CouchDB***, I had to search for the docs and specially the [URL structure](https://docs.couchdb.org/en/stable/api/index.html) for the server. And I found the path for the web administration tool for this database management system and it's `/_utils` 
+
+What is the path to list all databases in the web browser of the database management system? `/_all_dbs`
+
+>BTW! I aslo tried to run gobuster but it was useless since i figured out the path for the web administration LOL
+
+![Admin image](/images/Couch/admin.jpg)
+
+And if you browse to ***http://10.10.123.150:5984/_utils/database.html?secret*** it will lead you into a database that contains credentials
+
+`atena:t4qfzc******`
+
+## User FLAG
+
+I used the just found credentials to log into the server over SSH, and you can found the user flag in the home directory `/home/atena`
+
+```
+ssh atena@10.10.123.150
+```
+
+```
+THM{1ns3c***********}
+```
+
+## Root FLAG
+
+I tried openning the `.bash_history` file and it was not empty 
+
+![History](/images/Couch/history.jpg)
+
+And you can see that the user removed the flag directory that was in the `/root` and he/she puts the file into a docker container
+
+So I decided to run the exact same command and I was inside a docker container:
+
+```
+docker -H 127.0.0.1:2375 run --rm -it --privileged --net=host -v /:/mnt alpine
+```
+
+![Docker](/images/Couch/docker.jpg)
+
+And since I'm in the root directory I run a find command and I found the root.txt file (FLAG):
+
+```
+THM{RC******************}
+```
