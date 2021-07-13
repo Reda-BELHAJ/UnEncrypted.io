@@ -6,7 +6,8 @@ export default async (req, res) => {
     try {
         // An array with your links
         const links = [];
-        getAllPostSlugs().map((post) => {
+        const posts = getAllPostSlugs();
+        posts.map((post) => {
             links.push({
             url: `/blog/${post.params.slug}`,
             changefreq: "daily",
