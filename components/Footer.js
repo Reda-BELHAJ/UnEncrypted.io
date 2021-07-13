@@ -16,6 +16,7 @@ const Footer = () => {
                         </p>
                         <span className="inline-flex sm:ml-auto sm:mt-0 mt-2 justify-center sm:justify-start">
                             <a
+                                aria-label="Twitter"
                                 className="text-gray-50"
                                 href="https://twitter.com/RedatoB"
                                 rel="noopener noreferrer"
@@ -23,6 +24,7 @@ const Footer = () => {
                                 <SiTwitter />
                             </a>
                             <a
+                                aria-label="Github"
                                 className="ml-4 text-gray-50"
                                 href="https://github.com/Reda-BELHAJ"
                                 rel="noopener noreferrer"
@@ -30,6 +32,7 @@ const Footer = () => {
                                 <SiGithub />
                             </a>
                             <a
+                                aria-label="Instagram"
                                 className="ml-4 text-gray-50"
                                 href="https://www.instagram.com/ss8yeo_cho/"
                                 rel="noopener noreferrer"
@@ -37,11 +40,12 @@ const Footer = () => {
                                 <SiInstagram />
                             </a>
                             <a
-                            className="ml-4 text-gray-50"
-                            href="https://www.linkedin.com/in/reda-belhaj/"
-                            rel="noopener noreferrer"
-                            target="_blank"
-                            >
+                                aria-label="Linkedin"
+                                className="ml-4 text-gray-50"
+                                href="https://www.linkedin.com/in/reda-belhaj/"
+                                rel="noopener noreferrer"
+                                target="_blank"
+                                >
                                 <FiLinkedin />
                             </a>
                         </span>

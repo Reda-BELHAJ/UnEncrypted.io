@@ -10,7 +10,7 @@ const BlogContent = ({title}) => {
                         href={`/blog/${String(
                             title.split(" ").join("-").toLowerCase()
                         )}`}>
-                        <a className="text-green-300 dark:text-green-500">
+                        <a aria-label={title} className="text-green-300 dark:text-green-500">
                             <TiArrowRightThick />
                         </a>
                     </Link>
@@ -21,7 +21,7 @@ const BlogContent = ({title}) => {
                         href={`/blog/${String(
                             title.split(" ").join("-").toLowerCase()
                         )}`}>
-                        <a className="font-bold text-gray-700 dark:text-gray-100">
+                        <a aria-label={title} className="font-bold text-gray-700 dark:text-gray-100">
                             {title}
                         </a>
                     </Link>

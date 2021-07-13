@@ -25,16 +25,16 @@ const Navbar = () => {
                     <div className="flex items-center -mx-2">
                         <Toggle />
 
-                        <Link href="/blog" aria-label="Blog">
-                            <a className="flex items-center mx-2 text-gray-800 dark:hover:text-green-500 hover:text-green-500 dark:text-gray-50">
+                        <Link href="/blog">
+                            <a aria-label="Blog" className="flex items-center mx-2 text-gray-800 dark:hover:text-green-500 hover:text-green-500 dark:text-gray-50">
                                 <span className="">
                                 <ImSearch />
                                 </span>
                             </a>
                         </Link>
 
-                        <Link href="/tags" aria-label="Tags">
-                            <a className="flex items-center mx-2 text-gray-800 dark:hover:text-green-500 hover:text-green-500 dark:text-gray-50">
+                        <Link href="/tags">
+                            <a aria-label="Tags" className="flex items-center mx-2 text-gray-800 dark:hover:text-green-500 hover:text-green-500 dark:text-gray-50">
                                 <span className="text-xl ">
                                 <AiFillTags />
                                 </span>
@@ -42,8 +42,8 @@ const Navbar = () => {
                         </Link>
 
 
-                        <Link href="/about" aria-label="About Me">
-                            <a className="flex items-center mx-2 text-base text-gray-800 dark:hover:text-green-500 hover:text-green-500 dark:text-gray-50">
+                        <Link href="/about">
+                            <a aria-label="About Me" className="flex items-center mx-2 text-base text-gray-800 dark:hover:text-green-500 hover:text-green-500 dark:text-gray-50">
                                 <span className="text-xl ">
                                 <SiAboutDotMe />
                                 </span>

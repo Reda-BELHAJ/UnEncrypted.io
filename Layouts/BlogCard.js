@@ -27,11 +27,12 @@ function BlogCard({ blog }) {
                 </p>
                 <div className="flex items-center flex-wrap pb-2 border-b-2 border-green-300 mt-auto w-full justify-between dark:border-green-500">
                     <Link
+                        aria-label={blog.data.title}
                         href={`/blog/${String(
                             blog.data.title.split(" ").join("-").toLowerCase()
                         )}`}
                     >
-                    <a aria-label={blog.data.title} className="font-bold text-green-300 dark:text-green-500 inline-flex items-center">
+                    <a className="font-bold text-green-300 dark:text-green-500 inline-flex items-center">
                         Learn More{" "}
                         <span className="pl-1">
                             <AiOutlineArrowRight />
