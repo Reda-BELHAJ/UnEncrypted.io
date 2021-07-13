@@ -4,7 +4,6 @@ import { Readable } from 'stream'
 
 export default async (req, res) => {
     try {
-        // An array with your links
         const links = [];
         const posts = getAllPostSlugs();
 
@@ -15,8 +14,7 @@ export default async (req, res) => {
             priority: 0.9,
             });
         });
-    
-        // Add other pages
+
         const pages = ["/about", "/tags", "/blog"];
         pages.map((url) => {
             links.push({
@@ -26,7 +24,6 @@ export default async (req, res) => {
             });
         });
     
-        // Create a stream to write to
         const stream = new SitemapStream({
             hostname: `https://${req.headers.host}`,
         });
