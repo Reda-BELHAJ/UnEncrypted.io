@@ -7,6 +7,7 @@ export default async (req, res) => {
         // An array with your links
         const links = [];
         const posts = getAllPostSlugs();
+        
         posts.map((post) => {
             links.push({
             url: `/blog/${post.params.slug}`,
@@ -43,5 +44,5 @@ export default async (req, res) => {
     } catch (e) {
         console.log(e);
         res.send(JSON.stringify(e));
-        }
+    }
 };
