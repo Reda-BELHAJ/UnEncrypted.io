@@ -1,13 +1,12 @@
-import { useEffect } from "react"
 
-const Helmet = ({title, description, imageURL, imageALT}) => {
+const Helmet = ({title, description, imageURL, imageALT, url}) => {
 
     return (
         <>
             <meta property="og:title" content={title}/>
             <meta property="og:description" content={description} />
             <meta property="og:image" content={imageURL}/>
-            <meta property="og:url" content="https://unencrypted.vercel.app/"/>
+            <meta property="og:url" content={url}/>
             <meta name="twitter:card" content="summary_large_image" />
 
             <meta property="og:site_name" content="UnEncrypted." />

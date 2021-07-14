@@ -10,6 +10,8 @@ import ViewCounter from '../components/ViewCounter';
 import Helmet from "../components/Helmet";
 
 const BlogLayout = ({source, frontMatter}) => {
+    const slug = frontMatter.title.split(" ").join("-").toLowerCase()
+    
     return (
         <>
             <Head>
@@ -21,7 +23,8 @@ const BlogLayout = ({source, frontMatter}) => {
                     title= {`UnEncrypted | ${frontMatter.title}`}
                     description= {frontMatter.summary}
                     imageURL= {frontMatter.image}
-                    imageALT= {frontMatter.image} />
+                    imageALT= {frontMatter.image}
+                    url ={`https://unencrypted.vercel.app/blog/${slug}`} />
             </Head>
             <div className="bg-white dark:bg-gray-900">
                 <div className="min-h-screen relative">
