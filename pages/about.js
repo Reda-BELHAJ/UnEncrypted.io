@@ -16,8 +16,8 @@ const about = () => {
                 <Helmet 
                     title= "UnEncrypted | About me" 
                     description= "UnEncrypted is a personal blog page build with Next.js and Tailwind Css which takes the content from makdown files and renders it using Next.js." 
-                    imageURL= "/images/Meta/UnEncrypted.jpg"
-                    imageALT="/images/Meta/UnEncrypted.jpg"
+                    imageURL= "https://unencrypted.vercel.app/images/Meta/UnEncrypted.jpg"
+                    imageALT= "https://unencrypted.vercel.app/images/Meta/UnEncrypted.jpg"
                     url ="https://unencrypted.vercel.app/about" />
             </Head>
             <div className="min-h-screen relative bg-white dark:bg-gray-900">
