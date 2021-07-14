@@ -1,11 +1,15 @@
 module.exports = {
-  webpack(config, options) {
+  webpack(config, isServer) {
     config.module.rules.push({
       test: /\.mp3$/,
       use: {
         loader: 'url-loader',
       },
     });
+
+    if (isServer) {
+      require('./scripts/sitemap');
+    }
     return config;
   },
   images: {
