@@ -28,9 +28,7 @@ export default async (req, res) => {
             hostname: `https://${req.headers.host}`,
         });
     
-        res.writeHead(200, {
-            "Content-Type": "application/xml",
-        });
+        res.writeHead(200);
     
         const xmlString = await streamToPromise(
             Readable.from(links).pipe(stream)
