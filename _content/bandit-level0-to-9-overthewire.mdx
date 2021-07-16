@@ -11,7 +11,7 @@ image: "/images/OverTheWire/OverTheWire.png"
 
 The ***host*** to which you need to connect is *bandit.labs.overthewire.org*, on ***port*** 2220. The ***username*** is *bandit0* and the ***password*** is *bandit0*. 
 
-1. Enter the following command in your Terminal/ CMD/ PowerShell/ Cygwin Terminal /... :  
+1. Enter the following command in your Terminal :
 
 ```bash
 	ssh bandit.labs.overthewire.org -p 2220 -l bandit0
@@ -29,10 +29,12 @@ Enter the following command in your Terminal :
 ls -la
 # List information about the FILEs with the author of each file and also without ignoring entries (files) starting with .
 ```
+
 ```bash
 cat readme
 # Concatenate files and print on the standard output
 ```
+
 ```bash
 realpath readme
 # Return the canonicalised absolute pathname 
@@ -63,6 +65,7 @@ The ***host*** to which you need to connect is *bandit.labs.overthewire.org*, on
 ### Part I
 
 Enter the following command in your Terminal :  
+
 ```bash
 	cat < -
 ```
@@ -85,6 +88,7 @@ The ***host*** to which you need to connect is *bandit.labs.overthewire.org*, on
 ### Part I
 
 Enter the following command in your Terminal :  
+
 ```bash
     cat "spaces in this filename"
     # Or cat spaces\ in\ this\ filename
@@ -107,11 +111,13 @@ The ***host*** to which you need to connect is *bandit.labs.overthewire.org*, on
 ## Bandit Level 4
 ### Part I
 
-Enter the following command in your Terminal :  
+Enter the following command in your Terminal :
+
 ```bash
     	cd inhere/
         # change the working directory to inhere/
 ```
+
 ```bash
     	ls -la
    	cat .hidden
@@ -134,11 +140,13 @@ The ***host*** to which you need to connect is *bandit.labs.overthewire.org*, on
 ## Bandit Level 5
 ### Part I
 
-Enter the following command in your Terminal :  
+Enter the following command in your Terminal :
+
 ```bash
       cd inhere/
       # change the working directory to inhere/
 ```
+
 ```bash
       ls -la
       # there's 10 files and the one who store the password is "-file07" (the lenght of the key)
@@ -169,7 +177,8 @@ Properties given:
 - 1033 bytes in size
 - Not executable
 
-Enter the following command in your Terminal :  
+Enter the following command in your Terminal :
+
 ```bash
     cd inhere/
     # change the working directory to inhere/
@@ -210,7 +219,8 @@ Properties given:
 Hint:
 > ***Somewhere on the server***: this phrase means that we should search in all the OTW server "/".
 
-Enter the following command in your Terminal :  
+Enter the following command in your Terminal :
+
 ```bash
     ls -la
     # There's not a single file in this wd: /home/bandit6
@@ -236,7 +246,8 @@ The ***host*** to which you need to connect is *bandit.labs.overthewire.org*, on
 ## Bandit Level 8
 ### Part I
 
-Enter the following command in your Terminal :  
+Enter the following command in your Terminal :
+
 ```bash
     wc -l data.txt
     # There's 98567 line in data.txt 
@@ -259,7 +270,8 @@ The ***host*** to which you need to connect is *bandit.labs.overthewire.org*, on
 
 ## Bandit Level 9
 ### Part I
-Enter the following command in your Terminal :  
+Enter the following command in your Terminal :
+  
 ```bash
     wc -l data.txt
     # There's 1001 line in data.txt 
