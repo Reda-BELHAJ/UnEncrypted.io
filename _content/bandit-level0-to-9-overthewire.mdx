@@ -1,0 +1,284 @@
+---
+title: "Bandit Level0 to 9 OverTheWire"
+date: "07-16-2021"
+author: "Reda BELHAJ"
+summary: "The Bandit wargame is aimed at absolute beginners. It will teach the basics needed to be able to play other wargames. And This is a quick write-up of my solutions for this challenge."
+tags: ["OverTheWire", "Ctf", "Writeup", "Wargame"]
+image: "/images/OverTheWire/OverTheWire.png"
+---
+
+## Bandit Level 0
+
+The ***host*** to which you need to connect is *bandit.labs.overthewire.org*, on ***port*** 2220. The ***username*** is *bandit0* and the ***password*** is *bandit0*. 
+
+1. Enter the following command in your Terminal/ CMD/ PowerShell/ Cygwin Terminal /... :  
+
+```bash
+	ssh bandit.labs.overthewire.org -p 2220 -l bandit0
+	# OR ssh bandit0@bandit.labs.overthewire.org -p 2220
+	# password: bandit0
+```
+2. Enter the password as shown in the comment of bash (bandit0).
+
+## Bandit Level 1
+### Part I
+
+Enter the following command in your Terminal :  
+
+```bash
+ls -la
+# List information about the FILEs with the author of each file and also without ignoring entries (files) starting with .
+```
+```bash
+cat readme
+# Concatenate files and print on the standard output
+```
+```bash
+realpath readme
+# Return the canonicalised absolute pathname 
+```
+
+```bash
+# Exit the session then
+scp -P 2220 bandit0@bandit.labs.overthewire.org:/home/bandit0/readme <LocalMachinePATH>
+# <LocalMachinePATH> : your temporary file to copy the ascii text
+# Password           : bandit0
+```
+We are using realpath and [scp commands](https://linuxize.com/post/how-to-use-scp-command-to-securely-transfer-files/) to copy ***readme*** file from OTW server to our Machine, and using it for the next Level.
+
+### Part II
+
+The ***host*** to which you need to connect is *bandit.labs.overthewire.org*, on ***port*** 2220. The ***username*** is *bandit1* and the ***password*** is the text from readme [Part 1](https://github.com/Reda-BELHAJ/OverTheWire/blob/main/Bandit/Bandit0-9/Level1.md#part-i). 
+
+1. Enter the following command:  
+
+```bash
+	ssh bandit.labs.overthewire.org -p 2220 -l bandit1
+	# OR ssh bandit1@bandit.labs.overthewire.org -p 2220
+	# password: boJ9jbbUNNfktd78OOpsqOltutMc3MY1
+```
+2. Enter the password as shown in the comment of bash.
+
+## Bandit Level 2
+### Part I
+
+Enter the following command in your Terminal :  
+```bash
+	cat < -
+```
+and copy the text to your clipboard (or try [the scp Method](https://github.com/Reda-BELHAJ/OverTheWire/blob/main/Bandit/Bandit0-9/Level1.md#part-i)).
+
+### Part II
+
+The ***host*** to which you need to connect is *bandit.labs.overthewire.org*, on ***port*** 2220. The ***username*** is *bandit2* and the ***password*** is the text from your clipboard [Part 1](https://github.com/Reda-BELHAJ/OverTheWire/blob/main/Bandit/Bandit0-9/Level2.md#part-i). 
+
+1. Enter the following command:  
+
+```bash
+	ssh bandit.labs.overthewire.org -p 2220 -l bandit2
+	# OR ssh bandit2@bandit.labs.overthewire.org -p 2220
+	# password: CV1DtqXWVFXTvM2F0k09SHz0YwRINYA9
+```
+2. Enter the password as shown in the comment of bash.
+
+## Bandit Level 3
+### Part I
+
+Enter the following command in your Terminal :  
+```bash
+    cat "spaces in this filename"
+    # Or cat spaces\ in\ this\ filename
+```
+and copy the text to your clipboard (or try [the scp Method](https://github.com/Reda-BELHAJ/OverTheWire/blob/main/Bandit/Bandit0-9/Level1.md#part-i)).
+
+### Part II
+
+The ***host*** to which you need to connect is *bandit.labs.overthewire.org*, on ***port*** 2220. The ***username*** is *bandit3* and the ***password*** is the text from your clipboard [Part 1](https://github.com/Reda-BELHAJ/OverTheWire/blob/main/Bandit/Bandit0-9/Level3.md#part-i). 
+
+1. Enter the following command:  
+
+```bash
+	ssh bandit.labs.overthewire.org -p 2220 -l bandit3
+	# OR ssh bandit3@bandit.labs.overthewire.org -p 2220
+	# password: UmHadQclWmgdLOKQ3YNgjWxGoRMb5luK
+```
+2. Enter the password as shown in the comment of bash.
+
+## Bandit Level 4
+### Part I
+
+Enter the following command in your Terminal :  
+```bash
+    	cd inhere/
+        # change the working directory to inhere/
+```
+```bash
+    	ls -la
+   	cat .hidden
+```
+and copy the text to your clipboard (or try [the scp Method](https://github.com/Reda-BELHAJ/OverTheWire/blob/main/Bandit/Bandit0-9/Level1.md#part-i)).
+
+### Part II
+
+The ***host*** to which you need to connect is *bandit.labs.overthewire.org*, on ***port*** 2220. The ***username*** is *bandit4* and the ***password*** is the text from your clipboard [Part 1](https://github.com/Reda-BELHAJ/OverTheWire/blob/main/Bandit/Bandit0-9/Level4.md#part-i). 
+
+1. Enter the following command:  
+
+```bash
+	ssh bandit.labs.overthewire.org -p 2220 -l bandit4
+	# OR ssh bandit4@bandit.labs.overthewire.org -p 2220
+	# password: pIwrPrtPN36QITSp3EQaw936yaFoFgAB
+```
+2. Enter the password as shown in the comment of bash.
+
+## Bandit Level 5
+### Part I
+
+Enter the following command in your Terminal :  
+```bash
+      cd inhere/
+      # change the working directory to inhere/
+```
+```bash
+      ls -la
+      # there's 10 files and the one who store the password is "-file07" (the lenght of the key)
+      # if your terminal is messed up, try the "reset" command.
+      cat < -file07
+```
+and copy the text to your clipboard (or try [the scp Method](https://github.com/Reda-BELHAJ/OverTheWire/blob/main/Bandit/Bandit0-9/Level1.md#part-i)).
+
+### Part II
+
+The ***host*** to which you need to connect is *bandit.labs.overthewire.org*, on ***port*** 2220. The ***username*** is *bandit5* and the ***password*** is the text from your clipboard [Part 1](https://github.com/Reda-BELHAJ/OverTheWire/blob/main/Bandit/Bandit0-9/Level5.md#part-i). 
+
+1. Enter the following command:  
+
+```bash
+	ssh bandit.labs.overthewire.org -p 2220 -l bandit5
+	# OR ssh bandit5@bandit.labs.overthewire.org -p 2220
+	# password: koReBOKuIDDepwhWk7jZC0RTdopnAYKh
+```
+2. Enter the password as shown in the comment of bash.
+
+## Bandit Level 6
+### Part I
+
+Properties given:
+
+- Human-readable
+- 1033 bytes in size
+- Not executable
+
+Enter the following command in your Terminal :  
+```bash
+    cd inhere/
+    # change the working directory to inhere/
+```
+```bash
+    ls -la
+    # We did find a lot of directories (20) under inhere/ , So we have to automate the search about the properties given
+    find . -type f -size 1033c -exec cat {} +
+    # OR use 'cat $(find . -type f -size 1033c)'
+    # -type f -size 1033c : we select only files with 1033 bytes 'c' for bytes
+    # -exec cat {} +      : we execute cat < "the result of find command" 
+    #             {} will be expanded to the files found 
+    #             and + will enable us to read as many arguments as possible per invocation of cat
+    # try to use 'man' command to figure out your approach
+```
+and copy the text to your clipboard (or try [the scp Method](https://github.com/Reda-BELHAJ/OverTheWire/blob/main/Bandit/Bandit0-9/Level1.md#part-i)).
+
+### Part II
+
+The ***host*** to which you need to connect is *bandit.labs.overthewire.org*, on ***port*** 2220. The ***username*** is *bandit6* and the ***password*** is the text from your clipboard [Part 1](https://github.com/Reda-BELHAJ/OverTheWire/blob/main/Bandit/Bandit0-9/Level6.md#part-i). 
+
+1. Enter the following command:  
+
+```bash
+	ssh bandit.labs.overthewire.org -p 2220 -l bandit6
+	# OR ssh bandit6@bandit.labs.overthewire.org -p 2220
+	# password: DXjZPULLxYr17uwoI01bNLQbtFemEgo7
+```
+2. Enter the password as shown in the comment of bash.
+
+## Bandit Level 7
+### Part I
+Properties given:
+- Owned by user bandit7.
+- Owned by group bandit6.
+- 33 bytes in size.
+
+Hint:
+> ***Somewhere on the server***: this phrase means that we should search in all the OTW server "/".
+
+Enter the following command in your Terminal :  
+```bash
+    ls -la
+    # There's not a single file in this wd: /home/bandit6
+```
+```bash
+    find / -type f -user bandit7 -group bandit6 -size 33c -exec cat {} +
+```
+and copy the last text to your clipboard (or try [the scp Method](https://github.com/Reda-BELHAJ/OverTheWire/blob/main/Bandit/Bandit0-9/Level1.md#part-i)).
+
+### Part II
+
+The ***host*** to which you need to connect is *bandit.labs.overthewire.org*, on ***port*** 2220. The ***username*** is *bandit7* and the ***password*** is the text from your clipboard [Part 1](https://github.com/Reda-BELHAJ/OverTheWire/blob/main/Bandit/Bandit0-9/Level7.md#part-i). 
+
+1. Enter the following command:  
+
+```bash
+	ssh bandit.labs.overthewire.org -p 2220 -l bandit7
+	# OR ssh bandit7@bandit.labs.overthewire.org -p 2220
+	# password: HKBPTKQnIay4Fw76bEy8PVxKEDQRKTzs
+```
+2. Enter the password as shown in the comment of bash.
+
+## Bandit Level 8
+### Part I
+
+Enter the following command in your Terminal :  
+```bash
+    wc -l data.txt
+    # There's 98567 line in data.txt 
+    grep millionth data.txt
+```
+and copy the text to your clipboard (or try [the scp Method](https://github.com/Reda-BELHAJ/OverTheWire/blob/main/Bandit/Bandit0-9/Level1.md#part-i)).
+
+### Part II
+
+The ***host*** to which you need to connect is *bandit.labs.overthewire.org*, on ***port*** 2220. The ***username*** is *bandit8* and the ***password*** is the text from your clipboard [Part 1](https://github.com/Reda-BELHAJ/OverTheWire/blob/main/Bandit/Bandit0-9/Level8.md#part-i). 
+
+1. Enter the following command:  
+
+```bash
+	ssh bandit.labs.overthewire.org -p 2220 -l bandit8
+	# OR ssh bandit8@bandit.labs.overthewire.org -p 2220
+	# password: cvX2JJa4CFALtqS87jk27qwqGhBM9plV
+```
+2. Enter the password as shown in the comment of bash.
+
+## Bandit Level 9
+### Part I
+Enter the following command in your Terminal :  
+```bash
+    wc -l data.txt
+    # There's 1001 line in data.txt 
+    sort data.txt | uniq -u
+    # OR sort data.txt | uniq -c | grep "1 "
+    # and we can check by running also 'sort data.txt | uniq -c' 
+    #       it gives the number of times the line appears in 'data.txt' (Once 1)
+```
+And copy the text to your clipboard (or try [the scp Method](https://github.com/Reda-BELHAJ/OverTheWire/blob/main/Bandit/Bandit0-9/Level1.md#part-i)).
+
+### Part II
+
+The ***host*** to which you need to connect is *bandit.labs.overthewire.org*, on ***port*** 2220. The ***username*** is *bandit9* and the ***password*** is the text from your clipboard [Part 1](https://github.com/Reda-BELHAJ/OverTheWire/blob/main/Bandit/Bandit0-9/Level9.md#part-i). 
+
+1. Enter the following command:  
+
+```bash
+	ssh bandit.labs.overthewire.org -p 2220 -l bandit9
+	# OR ssh bandit9@bandit.labs.overthewire.org -p 2220
+	# password: UsvVyFSfZZWbi6wgC7dAFyFuR6jQQUhR
+```
+2. Enter the password as shown in the comment of bash.
