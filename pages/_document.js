@@ -7,7 +7,7 @@ class MyDocument extends Document {
             <Html lang="en">
                 <Head>
                     <meta httpEquiv="Content-Type" content="text/html; charset=utf-8" />
-                    <meta name="robots" content="index"/>
+                    <meta name="robots" content="follow, index" />
                     <meta name="googlebot" content="index" />
                     <meta name="keywords" content="UnEncrypted, Reda BELHAJ, Next.JS, Blog, PortFolio, WriteUps, Walkthrough, CTF, Reda, BELHAJ, TryHackMe, HackTheBox, CyberSecurity, Github, Vercel, UIR, Universite Internationale de Rabat, Training, Courses, Challenges, Git, Examples" />
                     <meta name="author" content="Reda BELHAJ" />
