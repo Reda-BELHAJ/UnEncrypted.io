@@ -49,7 +49,7 @@ function BlogCard({ blog }) {
                             </span>
                             <span className="text-gray-900 text-xs tracking-widest mt-0.5 dark:text-green-500">
                                 {`${views ? new Number(views).toLocaleString() : '–––'} `}
-                                <svg className="inline w-4 h-4 mr-1" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" strokeLinejoin="round" viewBox="0 0 24 24">
+                                <svg className="inline w-4 h-4 mr-1" stroke="currentColor" strokeWidth="2" fill="none" strokeLinecap="round" strokeLinejoin="round" viewBox="0 0 24 24">
                                     <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
                                     <circle cx="12" cy="12" r="3"></circle>
                                 </svg>

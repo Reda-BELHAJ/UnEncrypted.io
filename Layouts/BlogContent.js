@@ -9,7 +9,7 @@ const BlogContent = ({title}) => {
             <motion.div 
                 whileHover={{scale:1.2, originX:0}}
                 transition={{type: 'spring', stiffness:300}} 
-                className="mb-5 space-x-3">
+                className="mb-5 grid grid-cols-7">
                     
                 <div 
                     className="inline-block leading-relaxed">
@@ -25,14 +25,14 @@ const BlogContent = ({title}) => {
                     </Link>
                 </div>
                 
-                <div className="inline-block">
+                <div className="col-span-6 inline-block">
                     <Link 
                         href={`/blog/${String(
                             title.split(" ").join("-").toLowerCase()
                         )}`}>
                         <a 
                             aria-label={title} 
-                            className="font-bold text-gray-700 dark:text-gray-100">
+                            className="font-semibold text-gray-700 dark:text-gray-100">
                             {title}
                         </a>
                     </Link>
