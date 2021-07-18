@@ -1,0 +1,449 @@
+---
+title: "Bandit Level21 to 33 OverTheWire"
+date: "07-18-2021"
+author: "Reda BELHAJ"
+summary: "The Bandit wargame is aimed at absolute beginners. It will teach the basics needed to be able to play other wargames. And This is a quick write-up of my solutions for this challenge."
+tags: ["OverTheWire", "Ctf", "Writeup", "Wargame"]
+image: "/images/OverTheWire/OverTheWire.png"
+---
+
+## Bandit Level 21
+### Part I
+
+```bash
+    file suconnect
+    # bandit20-do: setuid ELF 32-bit LSB executable...
+    ./suconnect
+    # to give us the usage or an example: ./suconnect <port>
+    # We ll have to work on two terminals (Server/Client NC)
+```
+|   Terminal 1                  | Terminal 2                           |
+|---                            |---                                   |
+| ``` ./suconnect 33333 ``` | ``` nc -l localhost -p 33333 # Paste GbKksEFF4yrVs6il55v6gwY5aVje5f0j``` |
+
+And copy the text to your clipboard (or try [the scp Method](https://github.com/Reda-BELHAJ/OverTheWire/blob/main/Bandit/Bandit0-9/Level1.md#part-i))
+### Part II
+
+The ***host*** to which you need to connect is *bandit.labs.overthewire.org*, on ***port*** 2220. The ***username*** is *bandit21* and the ***password*** is the text from your clipboard [Part 1](https://github.com/Reda-BELHAJ/OverTheWire/blob/main/Bandit/Bnadit21-34/Level21.md#part-i). 
+
+1. Enter the following command:  
+
+```bash
+	ssh bandit.labs.overthewire.org -p 2220 -l bandit21
+	# OR ssh bandit21@bandit.labs.overthewire.org -p 2220
+	# password: gE269g2h3mw3pwgrj0Ha9Uoqen1c9DGr
+```
+2. Enter the password as shown in the comment of bash.
+
+## Bandit Level 22
+### Part I
+
+```bash
+    top
+    #   PID USER      PR  NI    VIRT    RES    SHR S  %CPU %MEM     TIME+ COMMAND
+    #  2850 bandit21  20   0   21468   5256   3100 S   0.0  0.1   0:00.28 bash
+    # 22068 bandit21  20   0   21148   4836   3020 S   0.0  0.1   0:00.05 bash
+    # There's two processes 
+```
+```bash
+    cd /etc/cron.d/
+    ls -la
+    cat cronjob_bandit22
+    # @reboot bandit23 /usr/bin/cronjob_bandit22.sh  &> /dev/null
+    # * * * * * bandit22 /usr/bin/cronjob_bandit22.sh &> /dev/null
+    cat /usr/bin/cronjob_bandit22.sh
+    # There's two commands 'chmod' and 'cat'
+    cat /tmp/t7O6lds9S0RqQh9aMcz6ShpAoZKF7fgv
+```
+
+And copy the text to your clipboard (or try [the scp Method](https://github.com/Reda-BELHAJ/OverTheWire/blob/main/Bandit/Bandit0-9/Level1.md#part-i))
+### Part II
+
+The ***host*** to which you need to connect is *bandit.labs.overthewire.org*, on ***port*** 2220. The ***username*** is *bandit22* and the ***password*** is the text from your clipboard [Part 1](https://github.com/Reda-BELHAJ/OverTheWire/blob/main/Bandit/Bnadit21-34/Level22.md#part-i). 
+
+1. Enter the following command:  
+
+```bash
+	ssh bandit.labs.overthewire.org -p 2220 -l bandit22
+	# OR ssh bandit22@bandit.labs.overthewire.org -p 2220
+	# password: Yk7owGAcWjwMVRwrTesJEwB7WVOiILLI
+```
+2. Enter the password as shown in the comment of bash.
+
+## Bandit Level 23
+### Part I
+
+```bash
+    top
+    #   PID USER      PR  NI    VIRT    RES    SHR S  %CPU %MEM     TIME+ COMMAND
+    # 12297 bandit22  20   0   21148   4868   3040 S   0.0  0.1   0:00.08 bash
+    # There's one process 
+```
+```bash
+    cd /etc/cron.d/
+    ls -la
+    cat cronjob_bandit23
+    # @reboot bandit23 /usr/bin/cronjob_bandit23.sh  &> /dev/null
+    # * * * * * bandit23 /usr/bin/cronjob_bandit23.sh &> /dev/null
+    cat /usr/bin/cronjob_bandit23.sh
+    # We see a pretty simple shell Lets run it
+    /usr/bin/cronjob_bandit23.sh
+    # Don' try to chmod the file like i did in the first attempt its already an executable.
+    cat /tmp/8169b67bd894ddbb4412f91573b38db3
+    # password: Yk7owGAcWjwMVRwrTesJEwB7WVOiILLI we got the same password because in the shell the variable 'myname' is bandit2
+    # Lets try convert "I am user bandit23" with md5sum 
+    echo I am user bandit23 | md5sum | cut -d ' ' -f 1
+    cat /tmp/8ca319486bfbbc3663ea0fbe81326349
+```
+
+And copy the text to your clipboard (or try [the scp Method](https://github.com/Reda-BELHAJ/OverTheWire/blob/main/Bandit/Bandit0-9/Level1.md#part-i))
+### Part II
+
+The ***host*** to which you need to connect is *bandit.labs.overthewire.org*, on ***port*** 2220. The ***username*** is *bandit23* and the ***password*** is the text from your clipboard [Part 1](https://github.com/Reda-BELHAJ/OverTheWire/blob/main/Bandit/Bnadit21-34/Level23.md#part-i). 
+
+1. Enter the following command:  
+
+```bash
+	ssh bandit.labs.overthewire.org -p 2220 -l bandit23
+	# OR ssh bandit23@bandit.labs.overthewire.org -p 2220
+	# password: jc1udXuA1tiHqjIsL8yaapX5XIAI6i0n
+```
+2. Enter the password as shown in the comment of bash.
+
+## Bandit Level 24
+### Part I
+
+```bash
+    ps -aux
+    # USER       PID %CPU %MEM    VSZ   RSS TTY      STAT START   TIME COMMAND
+    # bandit23   922  0.0  0.1  21156  5080 pts/33   Ss+  14:36   0:00 -bash
+    # bandit23  6488  0.0  0.1  21156  5080 pts/21   Ss+  14:48   0:00 -bash
+    # bandit23  9915  0.0  0.0  23816  3508 pts/95   S+   14:57   0:00 nano script
+    # bandit23 11295  0.0  0.1  21148  4860 pts/76   Ss   15:00   0:00 -bash
+    # bandit23 17360  0.0  0.1  21148  4868 pts/95   Ss   14:09   0:00 -bash
+```
+```bash
+    cd /etc/cron.d/
+    ls -al
+    cat cronjob_bandit24
+    # @reboot bandit24 /usr/bin/cronjob_bandit24.sh  &> /dev/null
+    # * * * * * bandit24 /usr/bin/cronjob_bandit24.sh &> /dev/null
+    cat /usr/bin/cronjob_bandit24.sh
+    # We see a pretty simple program Lets run it
+    /usr/bin/cronjob_bandit24.sh
+```
+```bash
+    mkdir /tmp/reda3
+    cd /tmp/reda3
+    chmod 777 .
+    vim firstscript.sh
+    # !/bin/sh
+    # cat /etc/bandit_pass/bandit24 > /tmp/reda3/result_password
+    # Then [ESC] and :wq to save and quit.
+    chmod 777 firstscript.sh
+    # Make the shell executable for all the users
+    cp firstscript.sh /var/spool/bandit24
+    # After few seconds 'result_password' will appear
+    cat result_password
+```
+
+And copy the text to your clipboard (or try [the scp Method](https://github.com/Reda-BELHAJ/OverTheWire/blob/main/Bandit/Bandit0-9/Level1.md#part-i))
+### Part II
+
+The ***host*** to which you need to connect is *bandit.labs.overthewire.org*, on ***port*** 2220. The ***username*** is *bandit24* and the ***password*** is the text from your clipboard [Part 1](https://github.com/Reda-BELHAJ/OverTheWire/blob/main/Bandit/Bnadit21-34/Level24.md#part-i). 
+
+1. Enter the following command:  
+
+```bash
+	ssh bandit.labs.overthewire.org -p 2220 -l bandit24
+	# OR ssh bandit24@bandit.labs.overthewire.org -p 2220
+	# password: UoMYTrfrBFHyQXmg6gzctqAwOmw1IohZ
+```
+2. Enter the password as shown in the comment of bash.
+
+## Bandit Level 25
+### Part I
+
+```bash
+    # We have to bruteforce the input by creating a script that try a range (0-10000) of numbers
+    mkdir /tmp/reda4
+    cd /tmp/reda4
+    vim sdscript.sh
+```
+```bash
+    !/bin/bash
+    for i in {0000..9999}
+    do
+        echo "UoMYTrfrBFHyQXmg6gzctqAwOmw1IohZ $i"
+    done
+    # [ESC] then :wq to save and quit
+```
+```bash
+    chmod +x sdscript.sh
+    ./sdscript.sh > range_numbers
+    nc localhost 30002 < range_numbers
+```
+
+And copy the text to your clipboard (or try [the scp Method](https://github.com/Reda-BELHAJ/OverTheWire/blob/main/Bandit/Bandit0-9/Level1.md#part-i))
+### Part II
+
+The ***host*** to which you need to connect is *bandit.labs.overthewire.org*, on ***port*** 2220. The ***username*** is *bandit25* and the ***password*** is the text from your clipboard [Part 1](https://github.com/Reda-BELHAJ/OverTheWire/blob/main/Bandit/Bnadit21-34/Level25.md#part-i). 
+
+1. Enter the following command:  
+
+```bash
+	ssh bandit.labs.overthewire.org -p 2220 -l bandit25
+	# OR ssh bandit25@bandit.labs.overthewire.org -p 2220
+	# password: uNG9O58gUE7snukf3bvZ0rxhtnjzSGzG
+```
+2. Enter the password as shown in the comment of bash.
+
+## Bandit Level 26
+### Part I
+
+```bash
+    ssh -i bandit26.sshkey bandit26@localhost
+    # Connection to localhost closed
+```
+```bash
+    cat /etc/passwd | grep bandit26
+    cat /usr/bin/showtext
+    # It appears that showtext is a bash program that run when we try to connect to Level26
+    # We try another time an ssh connection with a 'more' exploit
+    # Try to decrease lenght of your terminal window
+    ssh -i bandit26.sshkey bandit26@localhost
+    # Type 'v' to access the vim editor 
+    # Then :e /etc/bandit_pass/bandit26
+```
+
+And copy the text to your clipboard (or try [the scp Method](https://github.com/Reda-BELHAJ/OverTheWire/blob/main/Bandit/Bandit0-9/Level1.md#part-i))
+### Part II
+
+The ***host*** to which you need to connect is *bandit.labs.overthewire.org*, on ***port*** 2220. The ***username*** is *bandit26* and the ***password*** is the text from your clipboard [Part 1](https://github.com/Reda-BELHAJ/OverTheWire/blob/main/Bandit/Bnadit21-34/Level26.md#part-i). 
+
+1. Enter the following command:  
+
+```bash
+	ssh bandit.labs.overthewire.org -p 2220 -l bandit26
+	# OR ssh bandit26@bandit.labs.overthewire.org -p 2220
+	# password: 5czgV9L3Xx8JPOyRbXh6lQbmIOWvPT6Z
+```
+2. Enter the password as shown in the comment of bash.
+
+## Bandit Level 27
+### Part I
+
+```bash
+    ssh bandit.labs.overthewire.org -p 2220 -l bandit26
+    # Decrease the lenght of the window then enter the password
+    # Password: 5czgV9L3Xx8JPOyRbXh6lQbmIOWvPT6Z
+    # Type v fo vim editor
+```
+```bash
+    # Lets try to set the bash to '/bin/sh'
+    # Now it appears that we are in a child process launched by a shell called 'subshell'
+    :! ls -la
+    :! file bandit27-do
+    # bandit27-do : setuid ELF 32-bit LSB executable..
+    :! ./bandit27-do cat /etc/bandit_pass/bandit27
+```
+
+And copy the text to your clipboard (or try [the scp Method](https://github.com/Reda-BELHAJ/OverTheWire/blob/main/Bandit/Bandit0-9/Level1.md#part-i))
+### Part II
+
+The ***host*** to which you need to connect is *bandit.labs.overthewire.org*, on ***port*** 2220. The ***username*** is *bandit27* and the ***password*** is the text from your clipboard [Part 1](https://github.com/Reda-BELHAJ/OverTheWire/blob/main/Bandit/Bnadit21-34/Level27.md#part-i). 
+
+1. Enter the following command:  
+
+```bash
+	ssh bandit.labs.overthewire.org -p 2220 -l bandit27
+	# OR ssh bandit27@bandit.labs.overthewire.org -p 2220
+	# password: 3ba3118a22e93127a4ed485be72ef5ea
+```
+2. Enter the password as shown in the comment of bash.
+
+## Bandit Level 28
+### Part I
+
+```bash
+    mkdir /tmp/reda4
+    cd /tmp/reda4
+    git clone ssh://bandit27-git@localhost/home/bandit27-git/repo
+    # Paste 3ba3118a22e93127a4ed485be72ef5ea
+    cd repo
+    cat README
+```
+
+And copy the text to your clipboard (or try [the scp Method](https://github.com/Reda-BELHAJ/OverTheWire/blob/main/Bandit/Bandit0-9/Level1.md#part-i))
+### Part II
+
+The ***host*** to which you need to connect is *bandit.labs.overthewire.org*, on ***port*** 2220. The ***username*** is *bandit28* and the ***password*** is the text from your clipboard [Part 1](https://github.com/Reda-BELHAJ/OverTheWire/blob/main/Bandit/Bnadit21-34/Level28.md#part-i). 
+
+1. Enter the following command:  
+
+```bash
+	ssh bandit.labs.overthewire.org -p 2220 -l bandit28
+	# OR ssh bandit28@bandit.labs.overthewire.org -p 2220
+	# password: 0ef186ac70e04ea33b4c1853d2526fa2
+```
+2. Enter the password as shown in the comment of bash.
+
+## Bandit Level 29
+### Part I
+
+```bash
+    mkdir /tmp/reda5
+    cd /tmp/reda5
+    git clone  ssh://bandit28-git@localhost/home/bandit28-git/repo
+    # Paste 0ef186ac70e04ea33b4c1853d2526fa2
+    cd repo
+    cat README
+    git show
+    # Shows the changes made in the README.md file
+```
+
+And copy the text to your clipboard (or try [the scp Method](https://github.com/Reda-BELHAJ/OverTheWire/blob/main/Bandit/Bandit0-9/Level1.md#part-i))
+### Part II
+
+The ***host*** to which you need to connect is *bandit.labs.overthewire.org*, on ***port*** 2220. The ***username*** is *bandit29* and the ***password*** is the text from your clipboard [Part 1](https://github.com/Reda-BELHAJ/OverTheWire/blob/main/Bandit/Bnadit21-34/Level29.md#part-i). 
+
+1. Enter the following command:  
+
+```bash
+	ssh bandit.labs.overthewire.org -p 2220 -l bandit29
+	# OR ssh bandit29@bandit.labs.overthewire.org -p 2220
+	# password: bbc96594b4e001778eee9975372716b2
+```
+2. Enter the password as shown in the comment of bash.
+
+## Bandit Level 30
+### Part I
+
+```bash
+    mkdir /tmp/reda6
+    cd /tmp/reda6
+    git clone  ssh://bandit28-git@localhost/home/bandit28-git/repo
+    # Paste 0ef186ac70e04ea33b4c1853d2526fa2
+    cd repo
+    cat README
+    git show
+    # Shows the changes made in the README.md file Nothing interesting
+```
+```bash
+    git show-branch --all
+    # Shows the commit ancestry graph starting from the commit with both remote-tracking branches and local branches.
+    # Lets switch to 'origin/dev' and see those data needed for development
+    git checkout -b origin/dev
+    git remote show origin
+    git checkout dev
+```
+```bash
+    cat README.md
+```
+
+And copy the text to your clipboard (or try [the scp Method](https://github.com/Reda-BELHAJ/OverTheWire/blob/main/Bandit/Bandit0-9/Level1.md#part-i))
+### Part II
+
+The ***host*** to which you need to connect is *bandit.labs.overthewire.org*, on ***port*** 2220. The ***username*** is *bandit30* and the ***password*** is the text from your clipboard [Part 1](https://github.com/Reda-BELHAJ/OverTheWire/blob/main/Bandit/Bnadit21-34/Level30.md#part-i). 
+
+1. Enter the following command:  
+
+```bash
+	ssh bandit.labs.overthewire.org -p 2220 -l bandit30
+	# OR ssh bandit30@bandit.labs.overthewire.org -p 2220
+	# password: 5b90576bedb2cc04c86a9e924ce42faf
+```
+2. Enter the password as shown in the comment of bash.
+
+## Bandit Level 31
+### Part I
+
+```bash
+    mkdir /tmp/reda8
+    cd /tmp/reda8
+    git clone ssh://bandit30-git@localhost/home/bandit30-git/repo
+    # Paste 5b90576bedb2cc04c86a9e924ce42faf
+    cd repo
+    cat README
+    git show
+    # Shows the changes made in the README.md file Nothing interesting
+```
+```bash
+    git show-ref --tags -d
+    # we have a tag : secret
+    git show secret
+    # 47e603bb428404d265f59c42920d81e5
+```
+
+And copy the text to your clipboard (or try [the scp Method](https://github.com/Reda-BELHAJ/OverTheWire/blob/main/Bandit/Bandit0-9/Level1.md#part-i))
+### Part II
+
+The ***host*** to which you need to connect is *bandit.labs.overthewire.org*, on ***port*** 2220. The ***username*** is *bandit31* and the ***password*** is the text from your clipboard [Part 1](https://github.com/Reda-BELHAJ/OverTheWire/blob/main/Bandit/Bnadit21-34/Level31.md#part-i). 
+
+1. Enter the following command:  
+
+```bash
+	ssh bandit.labs.overthewire.org -p 2220 -l bandit31
+	# OR ssh bandit31@bandit.labs.overthewire.org -p 2220
+	# password: 47e603bb428404d265f59c42920d81e5
+```
+2. Enter the password as shown in the comment of bash.
+
+## Bandit Level 32
+### Part I
+
+```bash
+    mkdir /tmp/reda9
+    cd /tmp/reda9
+    git clone ssh://bandit31-git@localhost/home/bandit31-git/repo
+    # Paste 47e603bb428404d265f59c42920d81e5
+    cd repo
+    cat README
+```
+```bash
+    vim key.txt
+    # May I come in? [ESC] :wq
+    git add key.txt -f
+    # We force the commit because git ignore all the .txt because of the configuration in '.gitignore'
+    git commit
+    # Enter a message and save ^X
+    git push
+```
+
+And copy the text to your clipboard (or try [the scp Method](https://github.com/Reda-BELHAJ/OverTheWire/blob/main/Bandit/Bandit0-9/Level1.md#part-i))
+### Part II
+
+The ***host*** to which you need to connect is *bandit.labs.overthewire.org*, on ***port*** 2220. The ***username*** is *bandit32* and the ***password*** is the text from your clipboard [Part 1](https://github.com/Reda-BELHAJ/OverTheWire/blob/main/Bandit/Bnadit21-34/Level32.md#part-i). 
+
+1. Enter the following command:  
+
+```bash
+	ssh bandit.labs.overthewire.org -p 2220 -l bandit32
+	# OR ssh bandit32@bandit.labs.overthewire.org -p 2220
+	# password: 56a9bf19c63d650ce78e6ec0354ee45e
+```
+2. Enter the password as shown in the comment of bash.
+
+## Bandit Level 33
+### Part I
+
+```bash
+    # TO THE UPPERCASE SHELL
+    $0
+    ls -al
+    cat /etc/bandit_pass/bandit33
+```
+
+And copy the text to your clipboard (or try [the scp Method](https://github.com/Reda-BELHAJ/OverTheWire/blob/main/Bandit/Bandit0-9/Level1.md#part-i))
+### Part II
+
+The ***host*** to which you need to connect is *bandit.labs.overthewire.org*, on ***port*** 2220. The ***username*** is *bandit33* and the ***password*** is the text from your clipboard [Part 1](https://github.com/Reda-BELHAJ/OverTheWire/blob/main/Bandit/Bnadit21-34/Level33.md#part-i). 
+
+1. Enter the following command:  
+
+```bash
+	ssh bandit.labs.overthewire.org -p 2220 -l bandit33
+	# OR ssh bandit33@bandit.labs.overthewire.org -p 2220
+	# password: c9c3199ddf4121b10cf581a98d51caee
+```
+2. Enter the password as shown in the comment of bash.
