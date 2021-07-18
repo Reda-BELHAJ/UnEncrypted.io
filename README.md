@@ -19,7 +19,7 @@ $ yarn dev
 - [Tailwind CSS](https://tailwindcss.com/)
 - [Frame Motion](https://www.framer.com/motion/)
 
-For others plugins and dependencies take a look at [package.json](.package.json) 
+For others plugins and dependencies take a look at [package.json](https://github.com/Reda-BELHAJ/UnEncrypted.io/blob/main/package.json) 
 
 ## Content Constraint
 
