@@ -72,7 +72,7 @@ const securityHeaders = [
     key: 'Permissions-Policy',
     value: 'camera=(), microphone=(), geolocation=()'
   },
-  // Indexing
+  // Indexing X-Robots-Tag
   {
     key: 'X-Robots-Tag',
     value: 'index',
