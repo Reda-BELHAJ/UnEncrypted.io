@@ -19,18 +19,14 @@ const postDirectory = path.join(process.cwd(), "_content");
 
     posts.map((post) => {
         links.push({
-        url: `/blog/${post.params.slug}`,
-        changefreq: "daily",
-        priority: 0.9,
+            url: `/blog/${post.params.slug}`,
         });
     });
 
     const pages = ["/about", "/tags", "/blog"];
     pages.map((url) => {
         links.push({
-        url,
-        changefreq: "daily",
-        priority: 0.9,
+            url,
         });
     });
 
