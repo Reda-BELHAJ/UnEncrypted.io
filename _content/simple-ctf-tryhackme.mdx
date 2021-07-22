@@ -60,17 +60,17 @@ I next decided to run a gobuster scan on the webserver to see if there were any 
 gobuster dir -u http://10.10.198.35  -w /usr/share/SecLists/Discovery/Web-Content/directory-list-2.3-medium.txt -t 50 -x html,xml,php
 ```
 
-![Gobuster]("/images/Simple/gobuster.png")
+![Gobuster](/images/Simple/gobuster.jpg)
 
 ## Exploring 
 
 Browsing to ***http://10.10.198.35/simple*** gives us the version of CMS Made Simple:
 
-![Version]("/images/Simple/version.jpg")
+![Version](/images/Simple/version.jpg)
 
 I then searched for the cve on [exploit-db](https://www.exploit-db.com/exploits/46635) and found the cve with the exploit:
 
-![CVE]("/images/Simple/cve.jpg")
+![CVE](/images/Simple/cve.jpg)
 
 ## Exploiting
 
@@ -80,7 +80,7 @@ Then I run the exploit using python (version 2.7) inside a virtual environment:
 python cms_pa.py -u http://10.10.198.35/simple/ -c -w rockyou.txt
 ```
 
-![Password]("/images/Simple/password.jpg")
+![Password](/images/Simple/password.jpg)
 
 ## User Flag
 
