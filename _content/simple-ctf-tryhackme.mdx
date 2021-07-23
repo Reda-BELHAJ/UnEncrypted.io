@@ -93,6 +93,7 @@ mitch@secret
 ```
 ssh -p 2222 mitch@10.10.198.35
 ```
+Let's check the current dir for a flag:
 
 ```
 G00d *************
@@ -112,9 +113,11 @@ User mitch may run the following commands on Machine:
     (root) NOPASSWD: /usr/bin/vim
 ```
 
+So I checked [GTFObins](https://gtfobins.github.io/gtfobins/vim/#suid) so that I spawn a bash shell as root.
+
 ![SUID](/images/Simple/suid.jpg)
 
-And now we're root:
+And now we're root, Let's check the root dir for a flag:
 
 ```
 W3ll d*****************
