@@ -35,6 +35,33 @@ export const tracks = {
     ]
 }
 
+export const books = {
+    'name':[
+        'Forrest gump ',
+        'The godfather',
+        'Pulp fiction',
+        'American gangster',
+        'Dark knight',
+        'Django unchained',
+        'Due date' ,
+        'Inglorious basterds' ,
+        'The gentleman' ,
+        'The Irishman',
+    ],
+    'artist':[
+        'Robert Zemeckis',
+        'Francis Ford Coppola',
+        'Quentin Tarantino',
+        'Ridley Scott',
+        'Christopher Nolan',
+        'Quentin Tarantino',
+        'Todd Phillips',
+        'Quentin Tarantino',
+        'Guy Ritchie',
+        'Martin Scorsese'
+    ]
+}
+
 export const interests = [
     'Call of Duty',
     'CTF',
