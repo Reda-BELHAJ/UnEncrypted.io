@@ -4,6 +4,7 @@ import About from '../components/About'
 import Tracks from '../components/Tracks'
 import Head from "next/head";
 import Helmet from "../components/Helmet";
+import Books from '../components/Books';
 
 const about = () => {
     return (
@@ -24,6 +25,7 @@ const about = () => {
                 <Navbar />
                 <About />
                 <Tracks />
+                <Books />
                 <Footer />
             </div>
         </>
