@@ -1,4 +1,5 @@
 import Table from './Table'
+import {tracks} from '../Data/informationAboutMe'
 
 const Tracks = () => {
     return (
@@ -13,7 +14,7 @@ const Tracks = () => {
                     <div className="border-t border-green-300 dark:border-green-500">
                         <div className="pt-8 text-gray-900 dark:text-gray-50 max-w-none xl:col-span-2 text-justify">
                             Curious what I&apos;m currently listening to? Here&apos;s my top tracks on Spotify.
-                            <Table />
+                            <Table information={tracks} dir="Artist"/>
                         </div>
                     </div>
                 </div>
