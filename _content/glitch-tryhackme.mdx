@@ -6,7 +6,7 @@ summary: "This is a simple challenge in which you need to exploit a vulnerable w
 tags: ["TryHackMe", "Ctf", "Writeup"]
 image: "/images/GLITCH/bg.png"
 ---
-Let’s take a look at the [Glitch CTF](https://tryhackme.com/room/glitch) on TryHackMe Created by @infamous55.
+Let’s take a look at the [Glitch CTF](https://tryhackme.com/room/glitch) on TryHackMe Created by **@infamous55**.
 
 ## Enumeration
 ### Nmap Scan
@@ -23,7 +23,7 @@ After Inspecting the web application we can see an interesting script at the end
 
 ### Gobuster Scan
 I next decided to run a gobuster scan on the webserver to see if there were any interesting hidden directories, by the command:
-![Gobuster](/images/GLITCH/gobuster.jpg)
+![Gobuster](/images/GLITCH/gouster.jpg)
 
 Actually i run two scans one on the main directory of the application and the other one on tha api directory:
 ![Gobuster](/images/GLITCH/gobuster2.jpg)
@@ -36,12 +36,14 @@ When I look at the script that I found on the source code of the page I decided 
 ```
 
 So I run this command to decode the token and then I set the cookie and reopen the site:
+
 ```
 echo dGhpc19pc19ub3RfcmVhbA== | base64 --decode
 ```
 ![Token](/images/GLITCH/token.jpg)
 
 With the hint from TryHackMe I decided to try POST method on the items api:
+
 ```
 curl -X POST http://10.10.204.132/api/items
 ```
@@ -81,6 +83,7 @@ Now we're in the machine and I decided to take a look at the `package.json` to s
 ![Build](/images/GLITCH/build.jpg)
 
 Then I found the user.txt file:
+
 ```
 THM******************
 ```
@@ -100,7 +103,7 @@ With the help of some blogs and videos I found [this blog](https://www.cyberciti
 firefox --profile .firefox/b5w4643p.default-release --allow-downgrade
 ```
 ![Pass](/images/GLITCH/pass.jpg)
-We can now switch to v0id:
+We can now switch to **v0id**:
 
 ![Sudo](/images/GLITCH/sudo.jpg)
 
