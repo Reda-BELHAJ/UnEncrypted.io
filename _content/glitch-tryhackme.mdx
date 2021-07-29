@@ -108,6 +108,7 @@ We can now switch to **v0id**:
 ![Sudo](/images/GLITCH/sudo.jpg)
 
 And now with a fail `sudo -l` command I searched for files owned by root with the SUID:
+
 ```
 find / -type f -user root -perm -u=s 2>/dev/null
 ```
