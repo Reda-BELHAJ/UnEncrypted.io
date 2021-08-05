@@ -37,6 +37,7 @@ The function login() in the `login.js` script get 3 the username, the password a
 
 ## User Flag
 When I refresh the page we get a note to James and a SSH key, So I copy it and stores it in a file called `id_rsa`
+
 > Don't forget to change the permission of the file:
 
 ```
@@ -55,7 +56,7 @@ python ssh2john.py /home/kali/id_rsa > /home/kali/hash
 john /home/kali/hash
 ```
 
-![John](/images/Overpass/jhon.jpg)
+![John](/images/Overpass/john.jpg)
 
 After brute-forcing the ssh private key passphrase. Now we can log in via SSH:
 ![In](/images/Overpass/in.jpg)
