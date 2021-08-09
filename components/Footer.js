@@ -9,7 +9,7 @@ const Footer = () => {
         <>
             <footer className="absolute w-full -bottom-0">
                 <div className="bg-green-500 dark:bg-green-600">
-                    <div className="container mx-auto py-4 px-5 flex flex-wrap flex-col sm:flex-row">
+                    <div className="container max-w-7xl mx-auto py-4 px-5 flex flex-wrap flex-col sm:flex-row">
                         <p className="text-gray-50 text-sm text-center sm:text-left">
                             © {year} UnEncrypted —
                             <span className="text-gray-50 ml-1">Reda BELHAJ</span>
