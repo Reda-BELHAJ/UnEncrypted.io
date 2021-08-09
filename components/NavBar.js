@@ -8,7 +8,7 @@ import Toggle from './Toggle'
 const Navbar = () => {
     return (
         <header className="fixed w-full border-t-4 bg-gray-100 dark:bg-gray-900 border-green-500 dark:border-green-600 shadow dark:shadow-2 z-50">
-            <div className="container mx-auto px-6 py-4">
+            <div className="container max-w-7xl mx-auto px-6 py-4">
                 <div className="flex items-center justify-between">
                     <div>
                     <Link href="/" aria-label="Home">
