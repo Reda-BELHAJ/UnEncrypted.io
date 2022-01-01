@@ -12,7 +12,12 @@ const Footer = () => {
                     <div className="container max-w-7xl mx-auto py-4 px-5 flex flex-wrap flex-col sm:flex-row">
                         <p className="text-gray-50 text-sm text-center sm:text-left">
                             © {year} UnEncrypted —
-                            <span className="text-gray-50 ml-1">Reda BELHAJ</span>
+                            <span className="text-gray-50 ml-1">
+                                Featured on {" "}
+                                <a href="https://tech-blogs.dev/" rel="noopener noreferrer" target="_blank">
+                                    tech-blogs.dev
+                                </a>
+                            </span>
                         </p>
                         <span className="inline-flex sm:ml-auto sm:mt-0 mt-2 justify-center sm:justify-start">
                             <a
