@@ -12,7 +12,7 @@ const BlogContent = ({title}) => {
                 className="mb-5 grid grid-cols-7">
                     
                 <div 
-                    className="inline-block leading-relaxed">
+                    className="inline-block leading-relaxed align-middle">
                     <Link 
                         href={`/blog/${String(
                             title.split(" ").join("-").toLowerCase()
