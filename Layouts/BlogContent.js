@@ -12,7 +12,7 @@ const BlogContent = ({title}) => {
                 className="mb-5 grid grid-cols-7">
                     
                 <div 
-                    className="inline-block leading-relaxed align-middle">
+                    className="inline-block leading-relaxed">
                     <Link 
                         href={`/blog/${String(
                             title.split(" ").join("-").toLowerCase()
@@ -20,7 +20,7 @@ const BlogContent = ({title}) => {
                         <a 
                             aria-label={title} 
                             className="text-green-300 dark:text-green-500">
-                            <TiArrowRightThick />
+                            <TiArrowRightThick className="inline-block align-middle" />
                         </a>
                     </Link>
                 </div>
