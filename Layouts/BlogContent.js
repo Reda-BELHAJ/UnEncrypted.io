@@ -20,7 +20,7 @@ const BlogContent = ({title}) => {
                         <a 
                             aria-label={title} 
                             className="text-green-300 dark:text-green-500">
-                            <TiArrowRightThick />
+                            <TiArrowRightThick className="inline-block align-middle" />
                         </a>
                     </Link>
                 </div>
