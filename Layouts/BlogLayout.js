@@ -11,7 +11,6 @@ import Helmet from "../components/Helmet";
 
 const BlogLayout = ({source, frontMatter}) => {
     const slug = frontMatter.title.split(" ").join("-").toLowerCase()
-
     return (
         <>
             <Head>
@@ -22,8 +21,8 @@ const BlogLayout = ({source, frontMatter}) => {
                 <Helmet 
                     title= {`UnEncrypted | ${frontMatter.title}`}
                     description= {frontMatter.summary}
-                    imageURL= {`https://unencrypted.vercel.app/${frontMatter.image}`}
-                    imageALT= {`https://unencrypted.vercel.app/${frontMatter.image}`}
+                    imageURL= {`https://unencrypted.vercel.app${frontMatter.image}`}
+                    imageALT= {`https://unencrypted.vercel.app${frontMatter.image}`}
                     url ={`https://unencrypted.vercel.app/blog/${slug}`} />
             </Head>
             <div className="bg-white dark:bg-gray-900">
