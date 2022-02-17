@@ -3,7 +3,7 @@ import { FaTwitter } from "react-icons/fa";
 function BlogShare({frontMatter}) {
   return (
     <>
-      <div className="text-center pt-5">
+      <div className="text-center py-5">
         <button className="bg-green-300 dark:bg-green-500 px-3 py-1 font-semibold text-white inline-flex items-center space-x-2 rounded">
           <FaTwitter />
           <a
