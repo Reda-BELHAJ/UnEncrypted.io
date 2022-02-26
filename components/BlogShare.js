@@ -12,7 +12,7 @@ function BlogShare({frontMatter}) {
             target="_blank"
             href={`https://twitter.com/intent/tweet?text=${
               frontMatter.title
-            } by @RedatoB&url=https://unencrypted.vercel.app/blog/${
+            } Writeup by @RedatoB&url=https://unencrypted.vercel.app/blog/${
               frontMatter.title.split(" ").join("-").toLowerCase()
             }&hashtags=${frontMatter.tags}`}
           >
