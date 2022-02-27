@@ -1,0 +1,68 @@
+---
+title: "Jason TryHackMe"
+date: "02-27-2022"
+author: "Reda BELHAJ"
+summary: "We are Horror LLC, we specialize in horror, but one of the scarier aspects of our company is our front-end webserver. We can't launch our site in its current state and our level of concern regarding our cybersecurity is growing exponentially... Created by  @elbee!"
+tags: ["TryHackMe", "Ctf", "Writeup"]
+image: "/images/Jason/bg.png"
+---
+Let’s take a look at the [Jason CTF](https://tryhackme.com/room/jason) on TryHackMe Created by **@elbee**.
+
+## Enumeration
+### Nmap Scan
+The first step of my enumeration was a scan with **nmap**. by the command:
+
+```
+sudo nmap 10.10.180.116.109 -sS -Pn
+```
+The “Nmap Output” displayed `2` service running under port 22 and 80.
+![Nmap](/images/Jason/nmap.JPG)
+
+### Insecting elements
+I next decided to inspect elements of the web application. And I found:
+![html](/images/Jason/html.JPG)
+
+So the script tell us that when we enter an input inside the email input it assign a cookie for our session.
+
+### Investigating requests
+Then I started investigating requests and cookies made:
+![testOnSite](/images/Jason/testOnSite.JPG)
+
+And with the help of [CyberChef](https://gchq.github.io/CyberChef/) I get a clear text of the cookie:
+![testCyberChef](/images/Jason/testCyberChef.JPG)
+
+## Exploiting
+Now let’s look for exploits that we can use. And after some research I learned with the help of [hacktricks](https://book.hacktricks.xyz/pentesting-web/deserialization#nodejs) that `node-serialize` library allows to serialise functions and it will look like this:
+
+```
+{"rce":"_$$ND_FUNC$$_function(){ require('child_process').exec('ls /', function(error, stdout, stderr) { console.log(stdout) })}"}
+```
+
+And in our case it will look something like this:
+
+```
+{"email":"_$$ND_FUNC$$_function(){ return \'Hello There\'}"}
+```
+
+And again after some research I run a successfull payload: 
+![generatePAY](/images/Jason/generatePAY.JPG)
+![enter](/images/Jason/enter.JPG)
+
+### Reverse Shell
+I set up my netcat listener on port 4444 and with the payload that I entered in the web application. And **Great!** I received a reverse connection on my port 4444:
+![shell](/images/Jason/shell.JPG)
+
+## User Flag
+Inside the home directory of the `edward` user. I notice a file called `user.txt`. And I got the flag :
+![user](/images/Jason/user.JPG)
+
+## Root Flag
+Now it’s time to escalate our privileges and get the root flag. I run `sudo -l`  and I got that user `dylan` can run **npm** as root and with the help of [GTFO](https://gtfobins.github.io/) :
+![gtfo](/images/Jason/gtfo.JPG)
+
+Then I got the shell as root after the steps shown on GTFO:
+![sudoPriv](/images/Jason/sudoPriv.JPG)
+
+And I got the flag :
+
+![root](/images/Jason/root.JPG)
