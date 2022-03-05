@@ -1,0 +1,70 @@
+---
+title: "Oh My WebServer TryHackMe"
+date: "03-05-2022"
+author: "Reda BELHAJ"
+summary: "Oh My WebServer is a Medium Room in TryHackMe Created by  @tinyb0y!"
+tags: ["TryHackMe", "Ctf", "Writeup"]
+image: "/images/ohMyWeb/bg.png"
+---
+Let’s take a look at the [Oh My WebServer CTF](https://tryhackme.com/room/ohmyweb) on TryHackMe Created by **@tinyb0y**.
+
+## Enumeration
+### Nmap Scan
+The first step of my enumeration was a scan with **nmap**. by the command:
+
+```
+sudo nmap 10.10.155.74 -Pn -sV
+```
+The “Nmap Output” displayed `2` service running under port 22 and 80.
+![Nmap](/images/ohMyWeb/nmap.JPG)
+
+### Dirsearch Scan
+I next decided to run a Dirsearch scan on the webserver to see if there were any interesting hidden directories, by the command:
+![dirsearch](/images/ohMyWeb/dirsearch.JPG)
+
+I didn't found any thing special even with other wordlists.
+
+## Exploiting
+Now let’s look for exploits that we can use against **Apache version 2.4.49**.
+
+```
+searchsploit Apache 2.4.49
+```
+
+![Searchsploit](/images/ohMyWeb/searchsploit.JPG)
+The Output displayed that there's **Path Traversal** and **RCE**: Remote Code Execution:
+![exploit](/images/ohMyWeb/exploit.JPG)
+
+So let’s start the exploit:
+![example](/images/ohMyWeb/example.JPG)
+
+### Reverse Shell
+With the result of the last example we can now send a reverse shell. And it successfully did a RCE and uploaded a shell on the host. And I set up my netcat listener on port 4444:
+![revShell](/images/ohMyWeb/revShell.JPG)
+![revShell2](/images/ohMyWeb/revShell2.JPG)
+
+## User Flag
+Inside the `/` directory. I notice a file called `.dockerenv`. That indicates that we are in a docker container :
+![dockerContaine](/images/ohMyWeb/dockerContaine.JPG)
+
+So We must escape this docker container. When I was exploring some directories I run into the temporary directory and I found a python program called `omi.py`:
+![omi](/images/ohMyWeb/omi.JPG)
+![omiEn](/images/ohMyWeb/omiEn.JPG)
+
+So the omi is an unauthenticated RCE vulnerability effecting the OMI agent as root and I tried to run `id` and `pwd` commands:
+![exploitOmi](/images/ohMyWeb/exploitOmi.JPG)
+
+And I got the flag :
+
+```
+python3 omi.py -t 10.10.155.74 -c "find / -name 'user.txt'"
+python3 omi.py -t 10.10.155.74 -c "cat <result of the last command>"
+```
+
+![user](/images/ohMyWeb/user1.JPG)
+
+## Root Flag
+
+With the same approach I got the flag for root :
+
+![root](/images/ohMyWeb/root.JPG)
