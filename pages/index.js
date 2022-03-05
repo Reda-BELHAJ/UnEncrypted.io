@@ -44,11 +44,11 @@ export default function index({blogs, tagCount}){
       <Head>
         <title>UnEncrypted</title>
         <meta itemProp="name" content="UnEncrypted" />
-        <meta name="description" content="UnEncrypted is a personal blog page build with Next.js and Tailwind Css which takes the content from makdown files and renders it using Next.js." />
+        <meta name="description" content="" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <Helmet 
           title= "UnEncrypted" 
-          description= "UnEncrypted is a personal blog page build with Next.js and Tailwind Css which takes the content from makdown files and renders it using Next.js." 
+          description= "UnEncrypted: A Blog website for Security Enthusiasts and CTF Lovers. Focus on CTF, Labs, Challenges and more!" 
           imageURL= "https://unencrypted.vercel.app/images/Meta/UnEncrypted.jpg"
           imageALT= "https://unencrypted.vercel.app/images/Meta/UnEncrypted.jpg"
           url ="https://unencrypted.vercel.app" />
