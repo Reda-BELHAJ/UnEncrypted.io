@@ -7,7 +7,7 @@ tags: ["Diy", "Attiny85"]
 image: "/images/Rubber/bg.png"
 ---
 
-In this article, I’ll walk through how you can create a DIY Rubber Ducky and try to steal Wifi credentials send them to a webhook site.
+In this article, I’ll walk through how you can create a DIY Rubber Ducky and try to steal Wifi credentials and send them to a webhook site.
 
 ## Requirements
 * **ATtiny85** : The ATtiny85 is a microcontroller in a similar vein to the Arduino, but with much less IO pins, smaller memory and a smaller form factor.
@@ -16,7 +16,7 @@ In this article, I’ll walk through how you can create a DIY Rubber Ducky and t
 ## Configuration
 First we need to add an **Additional Boards Manager** to the Arduino IDE. Open Arduino IDE > Goto file > preferences and then add or paste [the package digistump index file](http://digistump.com/package_digistump_index.json):
 
-* **Link**: http://digistump.com/package_digistump_index.json
+* [Link](http://digistump.com/package_digistump_index.json)
 
 ![preferences](/images/Rubber/pre.JPG)
 
@@ -26,7 +26,7 @@ Secondly, we need to goto tools > boards manager and install **Digistump AVR Boa
 
 And now we need to install **Digistump Arduino Drivers** (just the *Digistump.Drivers.zip*) through the link below:
 
-* **Link**: https://github.com/digistump/DigistumpArduino/releases
+* [Link](https://github.com/digistump/DigistumpArduino/releases)
 
 ## Payloads 
 So before using one of **MTK911** payloads please make sure to read the *DISCLAIMER*:
@@ -35,7 +35,7 @@ So before using one of **MTK911** payloads please make sure to read the *DISCLAI
 
 And now we are all setup. we just need a payload and for this example we are going to use **Wi-Fi password stealer** from **MTK911** Github Repo: 
 
-* **Link**: https://github.com/MTK911/Attiny85/blob/master/payloads/Wi-Fi%20password%20stealer/WifiKey-Grab_Minimize-of-Shame.ino#L1
+* [Link](https://github.com/MTK911/Attiny85/blob/master/payloads/Wi-Fi%20password%20stealer/WifiKey-Grab_Minimize-of-Shame.ino)
 
 You can also test out [MTK911](https://github.com/MTK911/Attiny85)'s other payloads.
 
