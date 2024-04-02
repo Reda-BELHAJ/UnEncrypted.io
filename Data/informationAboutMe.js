@@ -15,7 +15,7 @@ export const tracks = {
         'Starboy',
         'Die For You',
         'Rose Golden',
-        'After Hours',
+        'Amnésie',
         'FML',
         'Reminder',
         'Redbone',
