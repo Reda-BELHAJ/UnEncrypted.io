@@ -1,7 +1,7 @@
 export const information = {
     'name':'Reda BELHAJ',
     'summary':[
-        'BELHAJ Reda: Fifth year Computer Science Student at the International University of Rabat.',
+        'BELHAJ Reda: Cybersecurity Engineer and Analyst.',
         'Ever since I was a kid, Computer science has been my passion. I still remember sitting in front of my Desktop loading some "Hello, World!" Tutorials, It was almost magic, being able to get the computers to do whatever I program it to do. Throughout middle and high school, I was a math lover, so I started working on Calculator programs, I spent an embarrassing amount of time struggling with books.',
         'This passion still carries me through my education at the International University of Rabat.There were more resources available to me than I ever could have imagined as a kid, I study new languages, algorithms, technologies, operating systems, and mathematics.',
         'Decide, Learn, Execute and Share those are my steps to create, "Real Artists Ship"- Steve Jobs'
